@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Typography, Button, Form, Input } from 'antd';
+import FileUpload from './../../utils/FileUpload.js';
+
+
 
 const { Title } = Typography;
 const { TextArea } = Input; /* textarea 태그를 TextArea로 변경 */
@@ -19,7 +22,7 @@ function UploadProductPage(props) {
     const [desc, setDesc] = useState("") /* 설명 state */
     const [price, setPrice] = useState(0) /* 가격 state */
     const [country, setCountry] = useState(1) /* 국가 state */
-    const [image, setImage] = useState([]) /* 파일이미지 state */
+    const [images, setImages] = useState([]) /* 파일이미지 state */
 
 
     const titleChangeHandler = (event) => {
@@ -35,7 +38,10 @@ function UploadProductPage(props) {
         setCountry(event.currentTarget.value)
     }
     const imageChangeHandler = (event) => {
-        setImage(event.currentTarget.value)
+        setImages(event.currentTarget.value)
+    }
+    const updateImages = (event) => {
+        setImages(event)
     }
 
     return (
@@ -44,6 +50,7 @@ function UploadProductPage(props) {
                 <Title level={2}>여행상품 업로드</Title>
             </div>
             <Form>
+                <FileUpload refreshFunction={updateImages} />
                 <label>이름</label>
                 <Input onChange={titleChangeHandler} value={title} />
                 <br />

@@ -20,7 +20,7 @@ const connect = mongoose.connect(config.mongoURI,
     useNewUrlParser: true, useUnifiedTopology: true,
     useCreateIndex: true, useFindAndModify: false
   })
-  .then(() => console.log('MongoDB Connected...'))
+  .then(() => console.log('몽고 DB 연결 성공'))
   .catch(err => console.log(err));
 
 app.use(cors())
@@ -34,6 +34,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
+app.use('/api/product', require('./routes/product'));
 
 
 //use this to show the image you have in node js server to client (react js)
