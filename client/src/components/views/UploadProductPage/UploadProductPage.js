@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Typography, Button, Form, Input } from 'antd';
+import { Typography, Form, Input } from 'antd';
 import FileUpload from './../../utils/FileUpload.js';
-
-
+import axios from 'axios';
 
 const { Title } = Typography;
 const { TextArea } = Input; /* textarea 태그를 TextArea로 변경 */
@@ -44,12 +43,42 @@ function UploadProductPage(props) {
         setImages(event)
     }
 
+    const submitHandler = (event) => {
+        event.preventDefault() /* 새로고침 되지 않도록 설정 */
+
+        /* 모든 입력칸이 채워지지 않으면 경고창 */
+        if (!title || !desc || !price || !country || !images) {
+            return alert("모든 입력창을 넣어주세요.")
+        }
+
+        const body = {
+            writer: props.user.userData._id, /* 로그인된 사람의 아이디 */
+            title: title,
+            desc: desc,
+            price: price,
+            country: country,
+            images: images
+        }
+        console.log(1);
+
+        /* 서버에 채운 값들을 request로 보내기 */
+        axios.post("/api/product", body)
+            .then((response) => {
+                if (response.data.success) {
+                    alert("상품 업로드 성공")
+                    props.history.push("/") /* 상품 저장이 완료되면 랜딩 페이지로 이동 */
+                } else {
+                    alert("상품 업로드 실패")
+                }
+            })
+    }
+
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title level={2}>여행상품 업로드</Title>
             </div>
-            <Form>
+            <Form onSubmit={submitHandler}>
                 <FileUpload refreshFunction={updateImages} />
                 <label>이름</label>
                 <Input onChange={titleChangeHandler} value={title} />
@@ -70,7 +99,7 @@ function UploadProductPage(props) {
                     }
                 </select>
                 <br />
-                <Button>완료</Button>
+                <button type='submit'>완료</button>
             </Form>
         </div>
     );
