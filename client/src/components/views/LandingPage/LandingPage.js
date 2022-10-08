@@ -7,9 +7,10 @@ import ImageSlider from './../../utils/ImageSlider';
 
 function LandingPage() {
 
-    const [products, setpProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0); /* 0부터 시작 */
-    const [limit, setLimit] = useState(8); /* 카드 8개씩 가져오기 */
+    const [limit, setLimit] = useState(8); /* 상품 8개씩 가져오기 */
+    const [postSize, setPostSize] = useState(0); /* 상품 개수 */
 
     useEffect(() => {
 
@@ -18,15 +19,8 @@ function LandingPage() {
             limit: limit
         }
 
-        axios.post('/api/product/products', body)
-            .then((response) => {
-                if (response.data.success) {
-                    console.log(response.data)
-                    setpProducts(response.data.productInfo) /* 서버에서 가져온 데이터를 state에 저장 */
-                } else {
-                    return alert('상품을 가져오는데 실패 했습니다.')
-                }
-            })
+        getProduct(body)
+
     }, [])
 
     /* 카드 만드는 기능 */
@@ -50,8 +44,36 @@ function LandingPage() {
         )
     })
 
+
+    const getProduct = (body) => {
+        axios.post('/api/product/products', body)
+            .then((response) => {
+                if (response.data.success) {
+                    if (body.loadMore) { /* 더보기 버튼을 누른 경우 */
+                        setProducts([...products, ...response.data.productInfo]) /* 새로 가져온 데이터를 기본 state에 추가로 저장 */
+                    } else { /* 더보기 버튼을 누르지 않은 경우 */
+                        setProducts(response.data.productInfo) /* 서버에서 가져온 상품 정보를 state에 저장 */
+                    }
+                    setPostSize(response.data.postSize) /* 서버에서 가져온 상품 개수를 state에 저장 */
+                } else {
+                    return alert('상품을 가져오는데 실패 했습니다.')
+                }
+            })
+    }
+
     /* 더보기 버튼 기능 */
-    const loadMoreHandler = (event) => { }
+    const loadMoreHandler = () => {
+        let loadMoreSkip = skip + limit
+
+        let body = {
+            skip: loadMoreSkip,
+            limit: limit,
+            loadMore: true /* 버튼을 눌렀을 때 */
+        }
+
+        getProduct(body)
+        setSkip(loadMoreSkip)
+    }
 
 
     return (
@@ -71,9 +93,13 @@ function LandingPage() {
                 {renderCards}
             </Row>
 
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button onClick={loadMoreHandler}>더보기</button>
-            </div>
+            { /* 더이상 가져올 상품 데이터가 없으면 더보기 버튼 보여주지 않음 */
+                postSize >= limit &&
+
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <button onClick={loadMoreHandler}>더보기</button>
+                </div>
+            }
         </div>
     )
 }
