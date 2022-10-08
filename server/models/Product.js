@@ -2,7 +2,7 @@ const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
-    writer: {
+    writer: { /* 현재 로그인된 유저의 ID */
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
@@ -18,7 +18,7 @@ const productSchema = mongoose.Schema({
         default: 0
     },
     images: {
-        type: Array,
+        type: Array, /* 여러장의 이미지 */
         default: []
     },
     sold: {

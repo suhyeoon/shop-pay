@@ -40,4 +40,24 @@ router.post("/", (req, res) => {
     })
 })
 
+/* MongoDB product 컬렉션에 들어있는 모든 상품 정보를 가져오는 기능*/
+router.post("/products", (req, res) => {
+
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0    
+    let limit = req.body.limit ? parseInt(req.body.limit) : 20
+
+
+    Product.find() /* MongoDB에 저장된 데이터를 가져옴 */
+        .populate("writer") /* 유저 ID인 'writer'를 가져오면 유저의 모든 정보를 가져올 수 있음  */
+        .skip(skip)
+        .limit(limit)
+        .exec((error, productInfo) => { /* productInfo 파라미터에 유저의 모든 정보가 담김 */
+            if (error) {
+                return res.status(400).json({ success: false, error })
+            } else {
+                return res.status(200).json({ success: true, productInfo }) /* 데이터 가져오기 성공하면 클라이언트에 productInfo도 같이 전달함 */
+            }
+        })
+})
+
 module.exports = router;
