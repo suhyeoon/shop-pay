@@ -20,7 +20,7 @@ function UploadProductPage(props) {
     const [title, setTitle] = useState("") /* 이름 state */
     const [desc, setDesc] = useState("") /* 설명 state */
     const [price, setPrice] = useState(0) /* 가격 state */
-    const [country, setCountry] = useState(1) /* 국가 state */
+    const [countries, setCountries] = useState(1) /* 대륙 state */
     const [images, setImages] = useState([]) /* 파일이미지 state */
 
 
@@ -33,8 +33,8 @@ function UploadProductPage(props) {
     const priceChangeHandler = (event) => {
         setPrice(event.currentTarget.value)
     }
-    const countryChangeHandler = (event) => {
-        setCountry(event.currentTarget.value)
+    const countriesChangeHandler = (event) => {
+        setCountries(event.currentTarget.value)
     }
     const imageChangeHandler = (event) => {
         setImages(event.currentTarget.value)
@@ -47,7 +47,7 @@ function UploadProductPage(props) {
         event.preventDefault() /* 새로고침 되지 않도록 설정 */
 
         /* 모든 입력칸이 채워지지 않으면 경고창 */
-        if (!title || !desc || !price || !country || !images) {
+        if (!title || !desc || !price || !countries || !images) {
             return alert("모든 입력창을 넣어주세요.")
         }
 
@@ -56,7 +56,7 @@ function UploadProductPage(props) {
             title: title,
             desc: desc,
             price: price,
-            country: country,
+            countries: countries,
             images: images
         }
         console.log(1);
@@ -79,7 +79,7 @@ function UploadProductPage(props) {
                 <Title level={2}>여행상품 업로드</Title>
             </div>
             <Form onSubmit={submitHandler}>
-                <FileUpload refreshFunction={updateImages} />
+                <FileUpload updateImages={updateImages} />
                 <label>이름</label>
                 <Input onChange={titleChangeHandler} value={title} />
                 <br />
@@ -89,7 +89,7 @@ function UploadProductPage(props) {
                 <label>가격</label>
                 <Input type='number' onChange={priceChangeHandler} value={price} />
                 <br />
-                <select onChange={countryChangeHandler} value={country}>
+                <select onChange={countriesChangeHandler} value={countries}>
                     {
                         countries.map((item) => {
                             return (

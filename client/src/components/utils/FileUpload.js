@@ -23,7 +23,7 @@ function FileUpload(props) {
                 if (response.data.success) { /* 성공적으로 가져오면 */
                     console.log(response.data)
                     setImages([...images, response.data.filePath])
-                    props.refreshFunction([...images, response.data.filePath]) /* 부모 컴포넌트로 전송 */
+                    props.updateImages([...images, response.data.filePath]) /* 부모 컴포넌트로 전송 */
                 } else {
                     alert('파일을 저장하는데 실패했습니다.')
                 }

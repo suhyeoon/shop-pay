@@ -26,7 +26,7 @@ const productSchema = mongoose.Schema({
         maxlength: 100,
         default: 0
     },
-    country: {
+    countries: {
         type: Number,
         default: 1
     },
