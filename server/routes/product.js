@@ -45,6 +45,7 @@ router.post("/products", (req, res) => {
 
     let skip = req.body.skip ? parseInt(req.body.skip) : 0
     let limit = req.body.limit ? parseInt(req.body.limit) : 20 /* true면 8개 false면 20개 */
+    let keyword = req.body.keyword
 
     let findArgs = {}
 
@@ -66,21 +67,42 @@ router.post("/products", (req, res) => {
         }
     }
 
-    Product.find(findArgs) /* MongoDB에 저장된 데이터를 가져옴 */
-        .populate("writer") /* 유저 ID인 'writer'를 가져오면 유저의 모든 정보를 가져올 수 있음  */
-        .skip(skip)
-        .limit(limit) /* 상품 데이터를 8개만 가져옴 */
-        .exec((error, productInfo) => { /* productInfo 파라미터에 유저의 모든 정보(상품 1개의 정보는 { } array 형태로 담김)가 담김 */
-            if (error) {
-                return res.status(400).json({ success: false, error })
-            } else {
-                return res.status(200).json({
-                    success: true,
-                    productInfo,
-                    postSize: productInfo.length /* 상품 개수 */
-                }) /* 데이터 가져오기 성공하면 클라이언트에 productInfo도 같이 전달함 */
-            }
-        })
+    if (keyword) { /* 검색 값이 들어오면 */
+        Product.find(findArgs) /* MongoDB에 저장된 데이터를 가져옴 */
+            .find({ $text: { $search: keyword } }) /* 몽고DB 문법 사용 */
+            .populate("writer") /* 유저 ID인 'writer'를 가져오면 유저의 모든 정보를 가져올 수 있음  */
+            .skip(skip)
+            .limit(limit) /* 상품 데이터를 8개만 가져옴 */
+            .exec((error, productInfo) => { /* productInfo 파라미터에 유저의 모든 정보(상품 1개의 정보는 { } array 형태로 담김)가 담김 */
+                if (error) {
+                    return res.status(400).json({ success: false, error })
+                } else {
+                    return res.status(200).json({
+                        success: true,
+                        productInfo,
+                        postSize: productInfo.length /* 상품 개수 */
+                    }) /* 데이터 가져오기 성공하면 클라이언트에 productInfo도 같이 전달함 */
+                }
+            })
+    } else {
+        Product.find(findArgs) /* MongoDB에 저장된 데이터를 가져옴 */
+            .populate("writer") /* 유저 ID인 'writer'를 가져오면 유저의 모든 정보를 가져올 수 있음  */
+            .skip(skip)
+            .limit(limit) /* 상품 데이터를 8개만 가져옴 */
+            .exec((error, productInfo) => { /* 쿼리 실행, productInfo 파라미터에 유저의 모든 정보(상품 1개의 정보는 { } array 형태로 담김)가 담김 */
+                if (error) {
+                    return res.status(400).json({ success: false, error })
+                } else {
+                    return res.status(200).json({
+                        success: true,
+                        productInfo,
+                        postSize: productInfo.length /* 상품 개수 */
+                    }) /* 데이터 가져오기 성공하면 클라이언트에 productInfo도 같이 전달함 */
+                }
+            })
+    }
+
+
 })
 
 module.exports = router;

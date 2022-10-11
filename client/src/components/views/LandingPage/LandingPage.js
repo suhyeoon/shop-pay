@@ -6,18 +6,20 @@ import Meta from 'antd/lib/card/Meta';
 import ImageSlider from './../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
+import SearchFeature from './Sections/SearchFeature';
 import { countries, price } from './Sections/Datas';
 
 function LandingPage() {
 
     const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0); /* 0부터 시작 */
-    const [limit, setLimit] = useState(1); /* 상품 8개씩 가져오기 */
+    const [limit, setLimit] = useState(8); /* 상품 8개씩 가져오기 */
     const [postSize, setPostSize] = useState(0); /* 상품 개수 */
     const [categoryFilters, setCategoryFilters] = useState({ /* 대륙과 가격 카테고리 */
         countries: [],
         price: []
     });
+    const [keyword, setKeyword] = useState(""); /* 검색 값 */
 
     useEffect(() => {
 
@@ -129,6 +131,21 @@ function LandingPage() {
 
     }
 
+    /* 검색 기능 */
+    const searchHandler = (keyword) => { /* keyword는 검색 값 state가 들어있음  */
+        setKeyword(keyword)
+
+        let body = {
+            skip: 0,
+            limit: limit, /* 8 */
+            filters: categoryFilters, /* 체크박스 or 라디오버튼을 누른 값 state */
+            keyword: keyword
+        }
+
+        getProduct(body)
+        setSkip(0)
+    }
+
     return (
         <div style={{ width: '75%', margin: '3rem auto' }}>
 
@@ -148,13 +165,10 @@ function LandingPage() {
                 </Col>
             </Row>
 
-
-
-
-
-
             {/* 검색 */}
-
+            <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem auto' }}>
+                <SearchFeature updateHandler={searchHandler} />
+            </div>
             {/* 카드 */}
 
             <Row gutter={[16, 16]}>
@@ -168,7 +182,9 @@ function LandingPage() {
                     <button onClick={loadMoreHandler}>더보기</button>
                 </div>
             }
+
         </div>
+
     )
 }
 
