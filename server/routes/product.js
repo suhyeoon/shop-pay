@@ -49,12 +49,22 @@ router.post("/products", (req, res) => {
     let findArgs = {}
 
     for (let key in req.body.filters) {
+        // console.log(key) /* countries 또는 price 출력 */
         if (req.body.filters[key].length > 0) { /* 하나라도 체크된 체크박스가 있으면 */
-            findArgs[key] = req.body.filters[key] /* findArgs의 { }에 저장 */
+
+            if (key === "price") {
+                findArgs[key] = {
+                    /* 크거나 같으면 */
+                    $gte: req.body.filters[key][0], /* Datas.js에서 price 데이터의 각 원소 "array"의 값에 0번째 인덱스 */
+                    /* 작거나 같으면 */
+                    $lte: req.body.filters[key][1] /* Datas.js에서 price 데이터의 각 원소 "array"의 값에 1번째 인덱스 */
+                }
+            } else if (key === "countries") {
+                findArgs[key] = req.body.filters[key] /* findArgs의 { }에 저장 */
+            }
+
         }
     }
-
-    console.log(findArgs); /* findArgs :  { countries: [ 1, 2, 3 ] } */
 
     Product.find(findArgs) /* MongoDB에 저장된 데이터를 가져옴 */
         .populate("writer") /* 유저 ID인 'writer'를 가져오면 유저의 모든 정보를 가져올 수 있음  */

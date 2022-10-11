@@ -5,13 +5,14 @@ import { Icon, Col, Card, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from './../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
-import { countries } from './Sections/Datas';
+import RadioBox from './Sections/RadioBox';
+import { countries, price } from './Sections/Datas';
 
 function LandingPage() {
 
     const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0); /* 0부터 시작 */
-    const [limit, setLimit] = useState(4); /* 상품 8개씩 가져오기 */
+    const [limit, setLimit] = useState(1); /* 상품 8개씩 가져오기 */
     const [postSize, setPostSize] = useState(0); /* 상품 개수 */
     const [categoryFilters, setCategoryFilters] = useState({ /* 대륙과 가격 카테고리 */
         countries: [],
@@ -97,11 +98,31 @@ function LandingPage() {
         setSkip(0)
     }
 
-    /* 자식 컴포넌트에서 가져온 체크표시가 된 체크박스 state를 (부모 컴포넌트에) 업데이트 하는 기능 */
-    const filterHandler = (filters, category) => {
+    /* price 데이터의 각 원소 "array"의 값을 추출하기 위한 기능 */
+    const priceHandler = (filters) => { /* filters는 체크된 id state가 들어있음 */
+        const data = price /* price는 Datas.js에 있는 price 전체 데이터 [ ] */
+        let array = []
+
+        for (let key in data) { /* Datas.js에 있는 price의 각 원소의 인덱스 */
+            if (data[key].id === parseInt(filters, 10)) { /* 10은 String 타입이 들어왔을 때 숫자 10으로 바꿔주기 위함 */
+                array = data[key].array  /* data[key].array 는 Datas.js 에 있는 price 데이터의 각 원소 { } 안에 있는 "array" 의 값 */
+            }
+        }
+        return array /* [0, 43] 또는 [43, 53] 형태로 반환 */
+    }
+
+    /* 자식 컴포넌트에서 가져온 체크된 id가 담긴 state를 (부모 컴포넌트에) 업데이트 하는 기능 */
+    const filterHandler = (filters, category) => { /* filters는 체크된 id state가 들어있음 */
+
         const newCategoryFilters = { ...categoryFilters } /* [ ] 아니라 { } */
 
         newCategoryFilters[category] = filters
+
+        /* price 만을 위한 기능 */
+        if (category === "price") {
+            let priceValues = priceHandler(filters)
+            newCategoryFilters[category] = priceValues
+        }
 
         showFilteredResults(newCategoryFilters)
         setCategoryFilters(newCategoryFilters)
@@ -116,10 +137,20 @@ function LandingPage() {
             </div>
 
             {/* 필터 */}
-            {/* 필터 - 체크박스*/}
-            <CheckBox list={countries} filterHandler={(filters) => { filterHandler(filters, "countries") }} />
+            <Row gutter={[16, 16]}>
+                <Col lg={12} xs={24}>
+                    {/* 필터 - 체크박스*/}
+                    <CheckBox list={countries} filterHandler={(filters) => { filterHandler(filters, "countries") }} />
+                </Col>
+                <Col lg={12} xs={24}>
+                    {/* 필터 - 라디오버튼*/}
+                    <RadioBox list={price} filterHandler={(filters) => { filterHandler(filters, "price") }} />
+                </Col>
+            </Row>
 
-            {/* 필터 - 라디오버튼*/}
+
+
+
 
 
             {/* 검색 */}
