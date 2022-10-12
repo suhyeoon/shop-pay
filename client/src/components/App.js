@@ -9,6 +9,7 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import UploadProductPage from './views/UploadProductPage/UploadProductPage.js';
+import DetailProductPage from './views/DetailProductPage/DetailProductPage';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route exact path="/" component={Auth(LandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
-          <Route exact path="/product/upload" component={Auth(UploadProductPage, true)} />
+          <Route exact path="/product/upload" component={Auth(UploadProductPage, true)} /> {/* 로그인한 유저만 접속 가능 */}
+          <Route exact path="/product/:productId" component={Auth(DetailProductPage, null)} /> {/* 로그인하지 않아도 접속 가능 */}
         </Switch>
       </div>
       <Footer />

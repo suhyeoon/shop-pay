@@ -13,7 +13,7 @@ function LandingPage() {
 
     const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0); /* 0부터 시작 */
-    const [limit, setLimit] = useState(8); /* 상품 8개씩 가져오기 */
+    const [limit, setLimit] = useState(1); /* 상품 8개씩 가져오기 */
     const [postSize, setPostSize] = useState(0); /* 상품 개수 */
     const [categoryFilters, setCategoryFilters] = useState({ /* 대륙과 가격 카테고리 */
         countries: [],
@@ -43,7 +43,9 @@ function LandingPage() {
             */
             <Col lg={6} md={8} xs={24} key={index}>
                 <Card cover={
-                    <ImageSlider images={product.images} /> /* 이미지 슬라이더 컴포넌트 */
+                    <a href={`/product/${product._id}`}> {/* 유니크 아이디 추가 */}
+                        <ImageSlider images={product.images} />
+                    </a>
                 }>
                     <Meta
                         title={product.title}
@@ -169,8 +171,8 @@ function LandingPage() {
             <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem auto' }}>
                 <SearchFeature updateHandler={searchHandler} />
             </div>
-            {/* 카드 */}
 
+            {/* 카드 */}
             <Row gutter={[16, 16]}>
                 {renderCards}
             </Row>

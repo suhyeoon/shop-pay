@@ -6,7 +6,7 @@ import axios from 'axios';
 const { Title } = Typography;
 const { TextArea } = Input; /* textarea 태그를 TextArea로 변경 */
 
-const countries = [
+const countriesOption = [
     { key: 1, value: "Africa" },
     { key: 2, value: "Europe" },
     { key: 3, value: "Asia" },
@@ -23,7 +23,6 @@ function UploadProductPage(props) {
     const [countries, setCountries] = useState(1) /* 대륙 state */
     const [images, setImages] = useState([]) /* 파일이미지 state */
 
-
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
     }
@@ -36,9 +35,7 @@ function UploadProductPage(props) {
     const countriesChangeHandler = (event) => {
         setCountries(event.currentTarget.value)
     }
-    const imageChangeHandler = (event) => {
-        setImages(event.currentTarget.value)
-    }
+
     const updateImages = (event) => {
         setImages(event)
     }
@@ -59,7 +56,6 @@ function UploadProductPage(props) {
             countries: countries,
             images: images
         }
-        console.log(1);
 
         /* 서버에 채운 값들을 request로 보내기 */
         axios.post("/api/product", body)
@@ -91,7 +87,7 @@ function UploadProductPage(props) {
                 <br />
                 <select onChange={countriesChangeHandler} value={countries}>
                     {
-                        countries.map((item) => {
+                        countriesOption.map((item) => {
                             return (
                                 <option key={item.key} value={item.key}>{item.value}</option>
                             )

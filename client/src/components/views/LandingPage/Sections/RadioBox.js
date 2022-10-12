@@ -24,7 +24,7 @@ function RadioBox(props) {
 
     return (
         <>
-            <Collapse>
+            <Collapse defaultActiveKey={['1']}>
                 <Panel header="Price">
                     <Radio.Group onChange={changeHandler} value={checked}>
                         {renderRadioLists()}
