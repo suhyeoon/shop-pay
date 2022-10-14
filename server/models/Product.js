@@ -10,7 +10,7 @@ const productSchema = mongoose.Schema({
         type: String,
         maxlength: 50
     },
-    description: {
+    desc: {
         type: String
     },
     price: {
@@ -39,11 +39,11 @@ const productSchema = mongoose.Schema({
 /* 검색 기능 */
 productSchema.index({ /* 검색어가 중점적으로 걸려야하는 필드 */
     title: 'text', /* title 필드 */
-    description: 'text' /* description 필드 */
+    desc: 'text' /* desc 필드 */
 }, {
     weights: { /* 각 필드의 중요도 */
         title: 5, /* title 필드를 5배 중요하게 여겨서 검색함 */
-        description: 1 /* description 필드를 1배 중요하게 여겨서 검색함 */
+        desc: 1 /* desc 필드를 1배 중요하게 여겨서 검색함 */
     }
 }
 )

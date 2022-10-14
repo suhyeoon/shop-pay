@@ -40,7 +40,7 @@ function DetailProductPage(props) {
                 </Col>
                 <Col lg={12} xs={24}>
                     {/* 상품정보 */}
-                    <ProductInfo />
+                    <ProductInfo product={product} />
                 </Col>
             </Row>
         </div>

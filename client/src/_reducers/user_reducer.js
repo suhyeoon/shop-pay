@@ -3,20 +3,29 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
+    ADD_TO_CART
 } from '../_actions/types';
- 
 
-export default function(state={},action){
-    switch(action.type){
+
+export default function (previousState = {}, action) {
+    switch (action.type) {
         case REGISTER_USER:
-            return {...state, register: action.payload }
+            return { ...previousState, register: action.payload }
         case LOGIN_USER:
-            return { ...state, loginSucces: action.payload }
+            return { ...previousState, loginSucces: action.payload }
         case AUTH_USER:
-            return {...state, userData: action.payload }
+            return { ...previousState, userData: action.payload }
         case LOGOUT_USER:
-            return {...state }
+            return { ...previousState }
+        case ADD_TO_CART:
+            return {
+                ...previousState,
+                userData: {
+                    ...previousState,
+                    cart: action.payload
+                }
+            }
         default:
-            return state;
+            return previousState;
     }
 }
