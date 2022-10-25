@@ -4,7 +4,8 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
-    ADD_TO_CART
+    ADD_TO_CART,
+    GET_CART_ITEMS
 } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
@@ -48,7 +49,7 @@ export function logoutUser() {
     }
 }
 
-/* 장바구니 담기 */
+/* 상품 상세보기 페이지 - 장바구니 담기 버튼 기능 */
 export function addToCart(id) {
 
     let body = {
@@ -58,8 +59,28 @@ export function addToCart(id) {
     const request = axios.post(`${USER_SERVER}/addToCart`, body)
         .then((response) => { return response.data })
 
-    return { /* Reducer 전달 */
+    return {
         type: ADD_TO_CART,
+        payload: request
+    }
+}
+
+/* 장바구니 페이지 - cart 안에 있는 각 상품의 id */
+export function getCartItems(cartItems, userCart) {
+    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+        .then((response) => {
+            userCart.forEach((cartItem) => {
+                response.data.forEach((productDetail, index) => {
+                    if (cartItem.id === productDetail._id) {
+                        response.data[index].quantity = cartItem.quantity
+                    }
+                })
+            })
+            return response.data
+        })
+
+    return {
+        type: GET_CART_ITEMS,
         payload: request
     }
 }

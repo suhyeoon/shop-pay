@@ -10,7 +10,7 @@ const { fixRequestBody } = require('http-proxy-middleware');
 //=================================
 
 router.get("/auth", auth, (req, res) => {
-    res.status(200).json({
+    res.status(200).json({ /* 프론트엔드 에게 유저 정보 전달 */
         _id: req.user._id,
         isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
@@ -19,6 +19,8 @@ router.get("/auth", auth, (req, res) => {
         lastname: req.user.lastname,
         role: req.user.role,
         image: req.user.image,
+        cart: req.user.cart,
+        history: req.user.history
     });
 });
 
@@ -112,7 +114,7 @@ router.post("/addToCart", auth, (req, res) => {
                     }
                 },
                 { new: true }, /* findOneAndUpdate로 업데이트 된 결과값을 반환 받으려면 { new: true } 를 반드시 넣어줘야함 */
-                (error, productInfo) => { /* userInfo에 해당 유저의 모든 정보가 담김 */
+                (error, userInfo) => { /* userInfo에 해당 유저의 모든 정보가 담김 */
                     if (error) {
                         return res.state(400).json({ success: false, error })
                     } else {

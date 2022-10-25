@@ -13,7 +13,7 @@ function LandingPage() {
 
     const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0); /* 0부터 시작 */
-    const [limit, setLimit] = useState(1); /* 상품 8개씩 가져오기 */
+    const [limit, setLimit] = useState(5); /* 상품 8개씩 가져오기 */
     const [postSize, setPostSize] = useState(0); /* 상품 개수 */
     const [categoryFilters, setCategoryFilters] = useState({ /* 대륙과 가격 카테고리 */
         countries: [],

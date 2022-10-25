@@ -6,24 +6,15 @@ import { Row, Col } from 'antd';
 
 function DetailProductPage(props) {
 
-    /* 유니크 아이디 가져오기 */
     const productId = props.match.params.productId
-
     const [product, setProduct] = useState({})
 
     useEffect(() => {
-
-        axios.get(`/api/product/products_by_id?id=${productId}&type=single`) /* 쿼리 형태로 서버에 전송 */
+        axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
             .then((response) => {
-                if (response.data.success) {
-                    console.log(response.data)
-                    setProduct(response.data.productInfo[0])
-                } else {
-                    alert('상세 정보 가져오기를 실패했습니다.')
-                }
-            }
-            )
-
+                setProduct(response.data[0])
+            })
+            .catch((error) => { alert(error) })
     }, [])
 
     return (
@@ -32,7 +23,6 @@ function DetailProductPage(props) {
                 <h1>{product.title}</h1>
             </div>
             <br />
-
             <Row gutter={[16, 16]}>
                 <Col lg={12} xs={24} >
                     {/* 상품이미지 */}

@@ -104,25 +104,30 @@ router.post("/products", (req, res) => {
 
 })
 
-/* 상세보기 기능 */
+/* 상품 상세보기 페이지, 장바구니 페이지 */
 router.get("/products_by_id", (req, res) => {
 
     /* 쿼리는 req.query로 가져옴 */
     let type = req.query.type /* 타입이 담김 */
-    let productId = req.query.id /* 유니크 아이디가 담김*/
+    let productIds = req.query.id /* 유니크 아이디가 담김*/
 
-    Product.find({ _id: productId })
-        .populate("writer") /* 유저 ID인 'writer'를 가져오면 유저의 모든 정보를 가져올 수 있음  */
-        .exec((error, productInfo) => {
+    if (type === 'array') {
+        let ids = req.query.id.split(',')
+        productIds = ids.map(item => {
+            return item
+        })
+    }
+
+    Product.find({ _id: { $in: productIds } })
+        .populate('writer')
+        .exec((error, product) => {
             if (error) {
-                return res.status(400).json({ success: false, error })
+                res.status(400).json(error)
             } else {
-                return res.status(200).json({
-                    success: true,
-                    productInfo
-                }) /* 데이터 가져오기 성공하면 클라이언트에 productInfo도 같이 전달함 */
+                res.status(200).json(product)
             }
         })
 })
+
 
 module.exports = router;

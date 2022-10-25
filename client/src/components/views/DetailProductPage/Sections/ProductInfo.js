@@ -7,17 +7,14 @@ function ProductInfo(props) {
     const dispatch = useDispatch()
 
     /* Redux 사용 - 유저 state를 Redux로 처리했기 때문 */
-    const clickHandler = (event) => {
+    const clickHandler = () => {
         /* 액션 addToCart에 상품 id 전달 */
         dispatch(addToCart(props.product._id))
     }
 
     return (
         <div>
-            <Descriptions
-                bordered
-                column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
-            >
+            <Descriptions>
                 <Descriptions.Item label="가격">{props.product.price}</Descriptions.Item>
                 <Descriptions.Item label="판매량">{props.product.sold}</Descriptions.Item>
                 <Descriptions.Item label="View">{props.product.views}</Descriptions.Item>
