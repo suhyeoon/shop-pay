@@ -4,7 +4,9 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     ADD_TO_CART,
-    GET_CART_ITEMS
+    GET_CART_ITEMS,
+    REMOVE_CART_ITEM,
+    ON_SUCCESS_BUY
 } from '../_actions/types';
 
 
@@ -22,14 +24,29 @@ export default function (previousState = {}, action) {
             return {
                 ...previousState,
                 userData: {
-                    ...previousState,
+                    ...previousState.userData,
                     cart: action.payload
                 }
             }
         case GET_CART_ITEMS:
+            return { ...previousState, cartDetail: action.payload }
+        case REMOVE_CART_ITEM:
             return {
                 ...previousState,
-                cartDetail: action.payload
+                userData: {
+                    ...previousState.userData,
+                    cart: action.payload.cart
+                },
+                cartDetail: action.payload.productInfo
+            }
+        case ON_SUCCESS_BUY:
+            return {
+                ...previousState,
+                userData: {
+                    ...previousState.userData,
+                    cart: action.payload.cart
+                },
+                cartDetail: action.payload.cartDetail
             }
         default:
             return previousState;

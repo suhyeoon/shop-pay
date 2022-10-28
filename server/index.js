@@ -15,11 +15,7 @@ const config = require("./config/key");
 //   .catch(err => console.error(err));
 
 const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI,
-  {
-    useNewUrlParser: true, useUnifiedTopology: true,
-    useCreateIndex: true, useFindAndModify: false
-  })
+const connect = mongoose.connect(config.mongoURI)
   .then(() => console.log('몽고 DB 연결 성공'))
   .catch(err => console.log(err));
 

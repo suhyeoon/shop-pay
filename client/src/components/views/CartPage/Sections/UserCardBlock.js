@@ -25,7 +25,7 @@ function UserCardBlock(props) {
                         ₩ {(product.price).toLocaleString('ko-KR')}
                     </td>
                     <td>
-                        <button>
+                        <button onClick={() => { props.removeItem(product._id) }}>
                             삭제하기
                         </button>
                     </td>

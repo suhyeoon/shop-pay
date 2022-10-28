@@ -21,10 +21,11 @@ const upload = multer({ storage: storage }).single("file")
 router.post("/image", (req, res) => {
     upload(req, res, error => {
         if (error) { /* 에러가 발생한 경우 - 에러정보 전달 */
-            return req.json({ success: false, error })
+            return res.json({ success: false, error })
+        } else {
+            /* 에러가 없는 경우 - 이미지파일이 저장된 위치, 저장된 파일명  */
+            return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
         }
-        /* 에러가 없는 경우 - 이미지파일이 저장된 위치, 저장된 파일명  */
-        return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
     })
 })
 
@@ -60,10 +61,8 @@ router.post("/products", (req, res) => {
                     /* 작거나 같으면 */
                     $lte: req.body.filters[key][1] /* Datas.js에서 price 데이터의 각 원소 "array"의 값에 1번째 인덱스 */
                 }
-            } else if (key === "countries") {
-                findArgs[key] = req.body.filters[key] /* findArgs의 { }에 저장 */
             }
-
+            findArgs[key] = req.body.filters[key] /* findArgs의 { }에 저장 */
         }
     }
 
@@ -101,11 +100,10 @@ router.post("/products", (req, res) => {
                 }
             })
     }
-
 })
 
 /* 상품 상세보기 페이지, 장바구니 페이지 */
-router.get("/products_by_id", (req, res) => {
+router.get('/products_by_id', (req, res) => {
 
     /* 쿼리는 req.query로 가져옴 */
     let type = req.query.type /* 타입이 담김 */
@@ -113,7 +111,7 @@ router.get("/products_by_id", (req, res) => {
 
     if (type === 'array') {
         let ids = req.query.id.split(',')
-        productIds = ids.map(item => {
+        productIds = ids.map((item) => {
             return item
         })
     }

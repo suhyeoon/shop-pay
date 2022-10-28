@@ -6,15 +6,15 @@ import { Row, Col } from 'antd';
 
 function DetailProductPage(props) {
 
-    const productId = props.match.params.productId
+    const productId = props.match.params.productId /* 유니크 아이디 가져오기 */
     const [product, setProduct] = useState({})
 
     useEffect(() => {
         axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
-            .then((response) => {
+            .then(response => {
                 setProduct(response.data[0])
             })
-            .catch((error) => { alert(error) })
+            .catch((error) => alert(error))
     }, [])
 
     return (
