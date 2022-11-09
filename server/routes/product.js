@@ -51,7 +51,7 @@ router.post("/products", (req, res) => {
     let findArgs = {}
 
     for (let key in req.body.filters) {
-        // console.log(key) /* countries 또는 price 출력 */
+        /* console.log(key) */ /* countries 또는 price 출력 */
         if (req.body.filters[key].length > 0) { /* 하나라도 체크된 체크박스가 있으면 */
 
             if (key === "price") {
@@ -61,8 +61,9 @@ router.post("/products", (req, res) => {
                     /* 작거나 같으면 */
                     $lte: req.body.filters[key][1] /* Datas.js에서 price 데이터의 각 원소 "array"의 값에 1번째 인덱스 */
                 }
+            } else {
+                findArgs[key] = req.body.filters[key] /* findArgs의 { }에 저장 */
             }
-            findArgs[key] = req.body.filters[key] /* findArgs의 { }에 저장 */
         }
     }
 

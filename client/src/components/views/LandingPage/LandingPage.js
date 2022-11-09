@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { FaCode } from "react-icons/fa";
 import axios from 'axios';
 import { Icon, Col, Card, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
@@ -11,15 +10,15 @@ import { countries, price } from './Sections/Datas';
 
 function LandingPage() {
 
-    const [products, setProducts] = useState([]);
-    const [skip, setSkip] = useState(0); /* 0부터 시작 */
-    const [limit, setLimit] = useState(5); /* 상품 8개씩 가져오기 */
-    const [postSize, setPostSize] = useState(0); /* 상품 개수 */
+    const [products, setProducts] = useState([])
+    const [skip, setSkip] = useState(0) /* 0부터 시작 */
+    const [limit, setLimit] = useState(5) /* 상품 8개씩 가져오기 */
+    const [postSize, setPostSize] = useState(0) /* 상품 개수 */
     const [categoryFilters, setCategoryFilters] = useState({ /* 대륙과 가격 카테고리 */
         countries: [],
         price: []
-    });
-    const [keyword, setKeyword] = useState(""); /* 검색 값 */
+    })
+    const [keyword, setKeyword] = useState("") /* 검색 값 */
 
     useEffect(() => {
 
@@ -31,6 +30,22 @@ function LandingPage() {
         getProduct(body)
 
     }, [])
+
+    const getProduct = (body) => {
+        axios.post('/api/product/products', body)
+            .then((response) => {
+                if (response.data.success) {
+                    if (body.loadMore) { /* 더보기 버튼을 누른 경우 */
+                        setProducts([...products, ...response.data.productInfo]) /* 새로 가져온 데이터를 기본 state에 추가로 저장 */
+                    } else { /* 더보기 버튼을 누르지 않은 경우 */
+                        setProducts(response.data.productInfo) /* 서버에서 가져온 상품 정보를 state에 저장 */
+                    }
+                    setPostSize(response.data.postSize) /* 서버에서 가져온 상품 개수를 state에 저장 */
+                } else {
+                    return alert('상품을 가져오는데 실패 했습니다.')
+                }
+            })
+    }
 
     /* 상품 카드를 만드는 기능 */
     const renderCards = products.map((product, index) => {
@@ -56,23 +71,6 @@ function LandingPage() {
         )
     })
 
-
-    const getProduct = (body) => {
-        axios.post('/api/product/products', body)
-            .then((response) => {
-                if (response.data.success) {
-                    if (body.loadMore) { /* 더보기 버튼을 누른 경우 */
-                        setProducts([...products, ...response.data.productInfo]) /* 새로 가져온 데이터를 기본 state에 추가로 저장 */
-                    } else { /* 더보기 버튼을 누르지 않은 경우 */
-                        setProducts(response.data.productInfo) /* 서버에서 가져온 상품 정보를 state에 저장 */
-                    }
-                    setPostSize(response.data.postSize) /* 서버에서 가져온 상품 개수를 state에 저장 */
-                } else {
-                    return alert('상품을 가져오는데 실패 했습니다.')
-                }
-            })
-    }
-
     /* 더보기 버튼 기능 */
     const loadMoreHandler = () => {
         let loadMoreSkip = skip + limit
@@ -80,7 +78,8 @@ function LandingPage() {
         let body = {
             skip: loadMoreSkip,
             limit: limit,
-            loadMore: true /* 버튼을 눌렀을 때 */
+            loadMore: true, /* 버튼을 눌렀을 때 */
+            filters: categoryFilters
         }
 
         /* 상품을 가져옴 */
@@ -108,7 +107,7 @@ function LandingPage() {
         let array = []
 
         for (let key in data) { /* Datas.js에 있는 price의 각 원소의 인덱스 */
-            if (data[key].id === parseInt(filters, 10)) { /* 10은 String 타입이 들어왔을 때 숫자 10으로 바꿔주기 위함 */
+            if (data[key]._id === parseInt(filters, 10)) { /* 10은 String 타입이 들어왔을 때 숫자 10으로 바꿔주기 위함 */
                 array = data[key].array  /* data[key].array 는 Datas.js 에 있는 price 데이터의 각 원소 { } 안에 있는 "array" 의 값 */
             }
         }
@@ -135,7 +134,6 @@ function LandingPage() {
 
     /* 검색 기능 */
     const searchHandler = (keyword) => { /* keyword는 검색 값 state가 들어있음  */
-        setKeyword(keyword)
 
         let body = {
             skip: 0,
@@ -144,6 +142,7 @@ function LandingPage() {
             keyword: keyword
         }
 
+        setKeyword(keyword)
         getProduct(body)
         setSkip(0)
     }
@@ -179,7 +178,6 @@ function LandingPage() {
 
             {
                 postSize >= limit &&
-
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <button onClick={loadMoreHandler}>더보기</button>
                 </div>

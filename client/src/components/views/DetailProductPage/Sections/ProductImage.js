@@ -10,7 +10,7 @@ function ProductImage(props) {
             let images = []
 
             props.product.images.map((item) => {
-                images.push({
+                return images.push({
                     original: `http://localhost:5000/${item}`,
                     thumbnail: `http://localhost:5000/${item}`
                 })

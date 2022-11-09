@@ -192,7 +192,7 @@ router.post("/successBuy", auth, (req, res) => {
     transactionData.data = req.body.paymentData
     transactionData.product = history
 
-
+    /* history 정보 */
     User.findOneAndUpdate(
         { _id: req.user._id },
         {
@@ -216,6 +216,7 @@ router.post("/successBuy", auth, (req, res) => {
                                 quantity: item.quantity
                             })
                         })
+
                         /* products 컬렉션에 구매한 상품의 sold 필드 업데이트 시키기 */
                         async.eachSeries(products, (item, callback) => {
                             Product.updateMany(

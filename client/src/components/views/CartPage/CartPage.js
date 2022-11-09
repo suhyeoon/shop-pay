@@ -29,10 +29,10 @@ function CartPage(props) {
 
         let total = 0
         cartDetail.map((item) => {
-            total += item.quantity * parseInt(item.price, 10)
-            setTotal(total)
-            setShowTotal(true)
+            return total += item.quantity * parseInt(item.price, 10)
         })
+        setTotal(total)
+        setShowTotal(true)
 
     }
 
@@ -62,8 +62,6 @@ function CartPage(props) {
                 if (response.payload.success) {
                     setShowTotal(false)
                     setShowSuccess(true)
-                } else {
-                    console.log('DB 저장 실패');
                 }
             })
     }
@@ -87,7 +85,7 @@ function CartPage(props) {
                             status="success"
                             title="Successfully Purchased Items"
                         />
-                        : <Empty />
+                        : <Empty description={false} />
             }
             {
                 showTotal &&

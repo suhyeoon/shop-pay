@@ -13,7 +13,7 @@ import { USER_SERVER } from '../components/Config.js';
 
 export function registerUser(dataToSubmit) {
     const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
-        .then(response => response.data)
+        .then(response => response.data);
 
     return {
         type: REGISTER_USER,
@@ -23,7 +23,7 @@ export function registerUser(dataToSubmit) {
 
 export function loginUser(dataToSubmit) {
     const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
-        .then(response => response.data)
+        .then(response => response.data);
 
     return {
         type: LOGIN_USER,
@@ -33,7 +33,7 @@ export function loginUser(dataToSubmit) {
 
 export function auth() {
     const request = axios.get(`${USER_SERVER}/auth`)
-        .then(response => response.data)
+        .then(response => response.data);
 
     return {
         type: AUTH_USER,
@@ -43,7 +43,7 @@ export function auth() {
 
 export function logoutUser() {
     const request = axios.get(`${USER_SERVER}/logout`)
-        .then(response => response.data)
+        .then(response => response.data);
 
     return {
         type: LOGOUT_USER,
@@ -60,7 +60,6 @@ export function addToCart(id) {
 
     const request = axios.post(`${USER_SERVER}/addToCart`, body)
         .then((response) => { return response.data })
-        .catch((error) => { alert(error) })
 
     return {
         type: ADD_TO_CART,
@@ -80,7 +79,7 @@ export function getCartItems(cartItems, userCart) {
                 })
             })
             return response.data
-        }).catch((error) => { alert(error) })
+        })
 
     return {
         type: GET_CART_ITEMS,
@@ -100,7 +99,7 @@ export function removeCartItem(productId) {
                 })
             })
             return response.data
-        }).catch((error) => { alert(error) })
+        })
 
     return {
         type: REMOVE_CART_ITEM,
@@ -114,6 +113,7 @@ export function onSuccessBuy(data) {
         .then((response) => {
             return response.data
         })
+    
     return {
         type: ON_SUCCESS_BUY,
         payload: request

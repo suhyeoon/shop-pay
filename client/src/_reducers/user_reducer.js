@@ -9,7 +9,6 @@ import {
     ON_SUCCESS_BUY
 } from '../_actions/types';
 
-
 export default function (previousState = {}, action) {
     switch (action.type) {
         case REGISTER_USER:

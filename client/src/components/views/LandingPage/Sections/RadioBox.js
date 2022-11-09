@@ -7,10 +7,10 @@ function RadioBox(props) {
     const [checked, setChecked] = useState(1) /* 선택된 id state */
 
     const renderRadioLists = () => /* { } 쓰지 않음 */
-        props.list && props.list.map((value, index) => {
+        props.list && props.list.map((value) => {
             return (
-                <React.Fragment key={index}>
-                    <Radio value={value.id}>
+                <React.Fragment key={value._id}>
+                    <Radio value={value._id}>
                         <span>{value.name}</span>
                     </Radio>
                 </React.Fragment>
