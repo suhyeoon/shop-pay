@@ -18,9 +18,8 @@ function FileUpload(props) {
 
         /* 서버에 이미지파일 전송 (이미지를 올렸을 때)  */
         axios.post('/api/product/image', formData, config)
-            /* 서버에서 보낸 이미지파일 저장정보를 저장 */
-            .then((response) => { /* 서버에서 보낸 저장정보를 가져와서 */
-                if (response.data.success) { /* 성공적으로 가져오면 */
+            .then((response) => {
+                if (response.data.success) {
                     console.log(response.data)
                     setImages([...images, response.data.filePath])
                     props.updateImages([...images, response.data.filePath]) /* 부모 컴포넌트로 전송 */

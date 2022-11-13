@@ -11,26 +11,24 @@ import { countries, price } from './Sections/Datas';
 function LandingPage() {
 
     const [products, setProducts] = useState([])
-    const [skip, setSkip] = useState(0) /* 0부터 시작 */
-    const [limit, setLimit] = useState(5) /* 상품 8개씩 가져오기 */
-    const [postSize, setPostSize] = useState(0) /* 상품 개수 */
-    const [categoryFilters, setCategoryFilters] = useState({ /* 대륙과 가격 카테고리 */
+    const [skip, setSkip] = useState(0)
+    const [limit, setLimit] = useState(8) /* 상품 개수 state */
+    const [postSize, setPostSize] = useState(0) /* 서버에서 새로 가져오는 상품 개수 state */
+    const [categoryFilters, setCategoryFilters] = useState({ /* countries와 price 카테고리 state */
         countries: [],
         price: []
     })
-    const [keyword, setKeyword] = useState("") /* 검색 값 */
+    const [keyword, setKeyword] = useState("") /* 검색 값 state */
 
     useEffect(() => {
-
         let body = {
             skip: skip,
             limit: limit
         }
-
         getProduct(body)
-
     }, [])
 
+    /* 상품 가져오는 기능 */
     const getProduct = (body) => {
         axios.post('/api/product/products', body)
             .then((response) => {
@@ -47,29 +45,33 @@ function LandingPage() {
             })
     }
 
-    /* 상품 카드를 만드는 기능 */
-    const renderCards = products.map((product, index) => {
-        return (
-            /* 
-                <Card> 1개는 24 사이즈 이다. 
-                데스크탑 : 한 줄에 4개의 <Card> 를 넣으려면 6 x 4 해서 lg = {6} 
-                노트북 : 한 줄에 3개의 <Card> 를 넣으려면 8 x 3 해서 md = {8} 
-                모바일 : 한 줄에 1개의 <Card> 를 넣으려면 24 x 1 해서 xs = {24} 
-            */
-            <Col lg={6} md={8} xs={24} key={index}>
-                <Card cover={
-                    <a href={`/product/${product._id}`}> {/* 유니크 아이디 추가 */}
-                        <ImageSlider images={product.images} />
-                    </a>
-                }>
-                    <Meta
-                        title={product.title}
-                        description={`$${product.price}`}
-                    />
-                </Card>
-            </Col>
-        )
-    })
+    /* 필터된 결과물을 보여주는 기능 */
+    const showFilteredResults = (filters) => {
+
+        let body = {
+            skip: 0,
+            limit: limit, /* 8 */
+            filters: filters
+        }
+
+        getProduct(body)
+        setSkip(0)
+    }
+
+    /* 검색 기능 */
+    const searchHandler = (keyword) => { /* 검색된 값 */
+
+        let body = {
+            skip: 0,
+            limit: limit,
+            filters: categoryFilters,
+            keyword: keyword
+        }
+
+        setKeyword(keyword)
+        getProduct(body)
+        setSkip(0)
+    }
 
     /* 더보기 버튼 기능 */
     const loadMoreHandler = () => {
@@ -82,23 +84,8 @@ function LandingPage() {
             filters: categoryFilters
         }
 
-        /* 상품을 가져옴 */
         getProduct(body)
         setSkip(loadMoreSkip)
-    }
-
-    /* 필터된 결과물을 보여주는 기능 */
-    const showFilteredResults = (filters) => {
-
-        let body = {
-            skip: 0,
-            limit: limit, /* 8 */
-            filters: filters
-        }
-
-        /* 상품을 가져옴 */
-        getProduct(body)
-        setSkip(0)
     }
 
     /* price 데이터의 각 원소 "array"의 값을 추출하기 위한 기능 */
@@ -106,22 +93,21 @@ function LandingPage() {
         const data = price /* price는 Datas.js에 있는 price 전체 데이터 [ ] */
         let array = []
 
-        for (let key in data) { /* Datas.js에 있는 price의 각 원소의 인덱스 */
-            if (data[key]._id === parseInt(filters, 10)) { /* 10은 String 타입이 들어왔을 때 숫자 10으로 바꿔주기 위함 */
-                array = data[key].array  /* data[key].array 는 Datas.js 에 있는 price 데이터의 각 원소 { } 안에 있는 "array" 의 값 */
+        for (let key in data) { /* Datas.js에 있는 price의 각 원소의 인덱스 추출 */
+            if (data[key]._id === parseInt(filters, 10)) { /* parseInt에서 10은 String 타입이 들어왔을 때 숫자 10으로 바꿔주기 위함 */
+                array = data[key].array  /* data[key].array 는 Datas.js 에 있는 price 데이터의 각 원소 { } 안에 있는 array 필드의 값 */
             }
         }
         return array /* [0, 43] 또는 [43, 53] 형태로 반환 */
     }
 
-    /* 자식 컴포넌트에서 가져온 체크된 id가 담긴 state를 (부모 컴포넌트에) 업데이트 하는 기능 */
-    const filterHandler = (filters, category) => { /* filters는 체크된 id state가 들어있음 */
+    /* 자식 컴포넌트에서 가져온 체크된 id가 담긴 state를 부모 컴포넌트에 업데이트 하는 기능 */
+    const filterHandler = (filters, category) => { /* filters는 체크된 id state */
 
         const newCategoryFilters = { ...categoryFilters } /* [ ] 아니라 { } */
-
         newCategoryFilters[category] = filters
 
-        /* price 만을 위한 기능 */
+        /* 카테고리 price 만을 위한 기능 */
         if (category === "price") {
             let priceValues = priceHandler(filters)
             newCategoryFilters[category] = priceValues
@@ -129,27 +115,34 @@ function LandingPage() {
 
         showFilteredResults(newCategoryFilters)
         setCategoryFilters(newCategoryFilters)
-
     }
 
-    /* 검색 기능 */
-    const searchHandler = (keyword) => { /* keyword는 검색 값 state가 들어있음  */
-
-        let body = {
-            skip: 0,
-            limit: limit, /* 8 */
-            filters: categoryFilters, /* 체크박스 or 라디오버튼을 누른 값 state */
-            keyword: keyword
-        }
-
-        setKeyword(keyword)
-        getProduct(body)
-        setSkip(0)
-    }
+    /* 상품 카드 기능 */
+    const renderCards = products.map((product, index) => {
+        return (
+            /* 
+                <Card> 1개는 24 사이즈 이다. 
+                데스크탑 : 한 줄에 4개의 <Card> 를 넣으려면 6 x 4 해서 lg = {6} 
+                노트북 : 한 줄에 3개의 <Card> 를 넣으려면 8 x 3 해서 md = {8} 
+                모바일 : 한 줄에 1개의 <Card> 를 넣으려면 24 x 1 해서 xs = {24} 
+            */
+            <Col lg={6} md={8} xs={24} key={index}>
+                <Card cover={
+                    <a href={`/product/${product._id}`}> {/* 유니크 아이디 */}
+                        <ImageSlider images={product.images} />
+                    </a>
+                }>
+                    <Meta
+                        title={product.title}
+                        description={`$${product.price}`}
+                    />
+                </Card>
+            </Col>
+        )
+    })
 
     return (
         <div style={{ width: '75%', margin: '3rem auto' }}>
-
             <div style={{ textAlign: 'center' }}>
                 <h2>Let's Travel Anywhere <Icon type="rocket" /> </h2>
             </div>
@@ -182,9 +175,7 @@ function LandingPage() {
                     <button onClick={loadMoreHandler}>더보기</button>
                 </div>
             }
-
         </div>
-
     )
 }
 

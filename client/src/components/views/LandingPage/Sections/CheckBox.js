@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Collapse, Checkbox } from 'antd';
 const { Panel } = Collapse;
 
-
 function CheckBox(props) {
 
     const [checked, setChecked] = useState([]) /* 체크된 id state */
 
     const toggleHandler = (value) => {
-        /* indexOf()는 값을 넣었을 때 배열에 일치하는 값이 있으면 일치하는 값의 인덱스를 반환하고
-        넣은 값이 배열과 일치하는 값이 없으면 -1을 반환한다. */
+        /* indexOf()는 값을 넣었을 때 배열에 
+        일치하는 값이 있으면 일치하는 값의 인덱스를 반환함
+        일치하는 값이 없으면 -1을 반환함 */
         const currentIndex = checked.indexOf(value._id)
 
         const newChecked = [...checked]
@@ -20,7 +20,7 @@ function CheckBox(props) {
         }
         setChecked(newChecked) /* 다시 원본 state에 저장 */
 
-        props.filterHandler(newChecked) /* 업데이트를 위해서 부모 컴포넌트로 전송 */
+        props.filterHandler(newChecked) /* 부모 컴포넌트로 전송 */
     }
 
     const renderCheckboxLists = () =>

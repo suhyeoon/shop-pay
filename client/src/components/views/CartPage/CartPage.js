@@ -6,6 +6,7 @@ import UserCardBlock from './Sections/UserCardBlock';
 import Paypal from './../../utils/Paypal';
 
 function CartPage(props) {
+
     const dispatch = useDispatch()
     const [total, setTotal] = useState(0) /* 총 결제금액 state */
     const [showTotal, setShowTotal] = useState(false) /* true 일때만 total state를 보여줌 */
@@ -24,7 +25,17 @@ function CartPage(props) {
         }
     }, [props.user.userData])
 
-    /* 총 결제금액 - 연산 기능 */
+    /* 삭제하기 버튼 */
+    let removeFromCart = (productId) => {
+        dispatch(removeCartItem(productId))
+            .then((response) => {
+                if (response.payload.productInfo.length <= 0) {
+                    setShowTotal(false)
+                }
+            })
+    }
+
+    /* 총 결제금액 */
     let calculateTotal = (cartDetail) => {
 
         let total = 0
@@ -34,16 +45,6 @@ function CartPage(props) {
         setTotal(total)
         setShowTotal(true)
 
-    }
-
-    /* 삭제하기 버튼 */
-    let removeFromCart = (productId) => {
-        dispatch(removeCartItem(productId))
-            .then((response) => {
-                if (response.payload.productInfo.length <= 0) {
-                    setShowTotal(false)
-                }
-            })
     }
 
     /* 총 결제금액 - 원화를 달러로 변환하는 기능 */
@@ -66,15 +67,12 @@ function CartPage(props) {
             })
     }
 
-
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
             <h1>My Cart</h1>
             <div>
                 <UserCardBlock products={props.user.cartDetail} removeItem={removeFromCart} />
             </div>
-
-
             {
                 showTotal ?
                     <div style={{ marginTop: '3rem' }}>

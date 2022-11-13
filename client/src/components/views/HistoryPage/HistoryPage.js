@@ -1,14 +1,11 @@
 import React from 'react'
 
 function HistoryPage(props) {
-
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
-
             <div style={{ textAlign: 'center' }}>
                 <h1>History</h1>
             </div>
-
             <table>
                 <thead>
                     <tr>
@@ -23,7 +20,6 @@ function HistoryPage(props) {
                         props.user.userData &&
                         props.user.userData.history &&
                         props.user.userData.history.map((product) => {
-                            console.log(props.user.userData.history)
                             return (
                                 product.map((item) => {
                                     return (

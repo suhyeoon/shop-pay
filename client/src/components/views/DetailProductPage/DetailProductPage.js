@@ -6,8 +6,7 @@ import { Row, Col } from 'antd';
 
 function DetailProductPage(props) {
 
-    const productId = props.match.params.productId /* 유니크 아이디 가져오기 */
-    console.log(productId);
+    const productId = props.match.params.productId /* 유니크 아이디 */
     const [product, setProduct] = useState({})
 
     useEffect(() => {

@@ -17,7 +17,6 @@ function ProductImage(props) {
             })
             setImportedImages(images)
         }
-
     }, [props.product]) /* props.product 값이 변할 때마다 실행 */
 
     return (

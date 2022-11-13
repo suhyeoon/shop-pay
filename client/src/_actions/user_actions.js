@@ -51,7 +51,7 @@ export function logoutUser() {
     }
 }
 
-/* 상품 상세보기 페이지 - 장바구니 담기 버튼 기능 */
+/* 상품 상세보기 페이지 - 장바구니 담기 버튼 */
 export function addToCart(id) {
 
     let body = {
@@ -87,6 +87,7 @@ export function getCartItems(cartItems, userCart) {
     }
 }
 
+/* 장바구니 페이지 - 삭제하기 버튼 */
 export function removeCartItem(productId) {
 
     const request = axios.get(`/api/users/removeFromCart?id=${productId}`)
@@ -107,13 +108,14 @@ export function removeCartItem(productId) {
     }
 }
 
+/* 장바구니 페이지 - paypal 결제 성공 */
 export function onSuccessBuy(data) {
 
     const request = axios.post(`/api/users/successBuy`, data)
         .then((response) => {
             return response.data
         })
-    
+
     return {
         type: ON_SUCCESS_BUY,
         payload: request

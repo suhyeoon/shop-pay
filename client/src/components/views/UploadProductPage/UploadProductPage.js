@@ -43,13 +43,12 @@ function UploadProductPage(props) {
     const submitHandler = (event) => {
         event.preventDefault() /* 새로고침 되지 않도록 설정 */
 
-        /* 모든 입력칸이 채워지지 않으면 경고창 */
         if (!title || !desc || !price || !countries || !images) {
             return alert("모든 입력창을 넣어주세요.")
         }
 
         const body = {
-            writer: props.user.userData._id, /* 로그인된 사람의 아이디 */
+            writer: props.user.userData._id,
             title: title,
             desc: desc,
             price: price,
@@ -57,12 +56,11 @@ function UploadProductPage(props) {
             images: images
         }
 
-        /* 서버에 채운 값들을 request로 보내기 */
         axios.post("/api/product", body)
             .then((response) => {
                 if (response.data.success) {
                     alert("상품 업로드 성공")
-                    props.history.push("/") /* 상품 저장이 완료되면 랜딩 페이지로 이동 */
+                    props.history.push("/") /* 완료되면 랜딩 페이지로 이동 */
                 } else {
                     alert("상품 업로드 실패")
                 }
@@ -98,7 +96,7 @@ function UploadProductPage(props) {
                 <button type='submit'>완료</button>
             </Form>
         </div>
-    );
+    )
 }
 
 export default UploadProductPage;
