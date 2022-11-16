@@ -4,7 +4,7 @@ import ProductImage from './Sections/ProductImage';
 import ProductInfo from './Sections/ProductInfo';
 import { Row, Col } from 'antd';
 
-function DetailProductPage(props) {
+function DetailProduct(props) {
 
     const productId = props.match.params.productId /* 유니크 아이디 */
     const [product, setProduct] = useState({})
@@ -37,4 +37,4 @@ function DetailProductPage(props) {
     )
 }
 
-export default DetailProductPage
+export default DetailProduct

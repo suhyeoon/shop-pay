@@ -7,7 +7,7 @@ import {
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
     ON_SUCCESS_BUY
-} from '../_actions/types';
+} from '../actions/types';
 
 export default function (previousState = {}, action) {
     switch (action.type) {

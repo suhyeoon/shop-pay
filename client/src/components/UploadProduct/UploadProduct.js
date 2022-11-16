@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Form, Input } from 'antd';
-import FileUpload from './../../utils/FileUpload.js';
+import FileUpload from '../../../utils/FileUpload';
 import axios from 'axios';
 
 const { Title } = Typography;
@@ -16,7 +16,7 @@ const countriesOption = [
     { key: 7, value: "Antarctica" }
 ]
 
-function UploadProductPage(props) {
+function UploadProduct(props) {
     const [title, setTitle] = useState("") /* 이름 state */
     const [desc, setDesc] = useState("") /* 설명 state */
     const [price, setPrice] = useState(0) /* 가격 state */
@@ -35,7 +35,6 @@ function UploadProductPage(props) {
     const countriesChangeHandler = (event) => {
         setCountries(event.currentTarget.value)
     }
-
     const updateImages = (event) => {
         setImages(event)
     }
@@ -99,4 +98,4 @@ function UploadProductPage(props) {
     )
 }
 
-export default UploadProductPage;
+export default UploadProduct

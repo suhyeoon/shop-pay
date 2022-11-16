@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HistoryPage(props) {
+function History(props) {
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <div style={{ textAlign: 'center' }}>
@@ -40,4 +40,4 @@ function HistoryPage(props) {
     )
 }
 
-export default HistoryPage
+export default History

@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { getCartItems, onSuccessBuy, removeCartItem } from '../../../_actions/user_actions';
 import { Empty, Result } from 'antd';
 import UserCardBlock from './Sections/UserCardBlock';
-import Paypal from './../../utils/Paypal';
+import Paypal from '../../../utils/Paypal';
 
-function CartPage(props) {
+function Cart(props) {
 
     const dispatch = useDispatch()
     const [total, setTotal] = useState(0) /* 총 결제금액 state */
@@ -96,4 +96,4 @@ function CartPage(props) {
     )
 }
 
-export default CartPage
+export default Cart
