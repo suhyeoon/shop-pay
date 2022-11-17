@@ -1,0 +1,26 @@
+.file {
+  display: flex;
+  justify-content: space-between;
+}
+.file .dropzon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 340px;
+  height: 240px;
+  border: 1px solid lightgray;
+}
+.file .dropzon_icon {
+  font-size: 3rem;
+}
+.file .image_box {
+  display: flex;
+  width: 340px;
+  height: 240px;
+  overflow-y: scroll;
+}
+.file .image {
+  min-width: 340px;
+  width: 340px;
+  height: 240px;
+}
