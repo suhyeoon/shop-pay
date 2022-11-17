@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getCartItems, onSuccessBuy, removeCartItem } from '../../../_actions/user_actions';
+import { getCartItems, onSuccessBuy, removeCartItem } from '../../store/actions/user';
 import { Empty, Result } from 'antd';
 import UserCardBlock from './Sections/UserCardBlock';
-import Paypal from '../../../utils/Paypal';
+import Paypal from '../../utils/Paypal';
 
 function Cart(props) {
 

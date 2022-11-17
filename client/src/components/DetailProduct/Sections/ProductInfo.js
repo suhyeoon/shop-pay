@@ -1,10 +1,10 @@
 import React from 'react';
 import { Descriptions, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../../_actions/user_actions';
+import { addToCart } from '../../../store/actions/user';
 
 function ProductInfo(props) {
-    
+
     const dispatch = useDispatch()
 
     /* Redux 사용 - 유저 state를 Redux로 처리했기 때문 */
