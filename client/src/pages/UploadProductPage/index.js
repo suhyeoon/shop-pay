@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Typography, Form, Input } from 'antd';
+import { BASE_URL } from "../../constants/api";
 import FileUpload from '../../utils/FileUpload';
 import axios from 'axios';
+import Auth from "../../hooks/auth";
 
 const { Title } = Typography;
 const { TextArea } = Input; /* textarea 태그를 TextArea로 변경 */
@@ -16,7 +18,7 @@ const countriesOption = [
     { key: 7, value: "Antarctica" }
 ]
 
-function UploadProduct(props) {
+const Index = (props) => {
     const [title, setTitle] = useState("") /* 이름 state */
     const [desc, setDesc] = useState("") /* 설명 state */
     const [price, setPrice] = useState(0) /* 가격 state */
@@ -55,7 +57,7 @@ function UploadProduct(props) {
             images: images
         }
 
-        axios.post("/api/product", body)
+        axios.post(`${BASE_URL}/product`, body)
             .then((response) => {
                 if (response.data.success) {
                     alert("상품 업로드 성공")
@@ -98,4 +100,4 @@ function UploadProduct(props) {
     )
 }
 
-export default UploadProduct
+export default Auth(Index, true)

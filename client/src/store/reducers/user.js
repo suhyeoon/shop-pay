@@ -3,7 +3,7 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
-    ADD_TO_CART,
+    ADD_CART,
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
     ON_SUCCESS_BUY
@@ -19,7 +19,7 @@ export default function (previousState = {}, action) {
             return { ...previousState, userData: action.payload }
         case LOGOUT_USER:
             return { ...previousState }
-        case ADD_TO_CART:
+        case ADD_CART:
             return {
                 ...previousState,
                 userData: {

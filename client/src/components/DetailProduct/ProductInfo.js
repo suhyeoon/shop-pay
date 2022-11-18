@@ -1,7 +1,7 @@
 import React from 'react';
 import { Descriptions, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../store/actions/user';
+import { addCart } from '../../store/actions/user';
 
 function ProductInfo(props) {
 
@@ -9,7 +9,7 @@ function ProductInfo(props) {
 
     /* Redux 사용 - 유저 state를 Redux로 처리했기 때문 */
     const clickHandler = () => {
-        dispatch(addToCart(props.product._id))
+        dispatch(addCart(props.product._id))
     }
 
     return (

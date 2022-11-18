@@ -73,7 +73,7 @@ router.get("/logout", auth, (req, res) => {
 });
 
 /* 장바구니 담기 */
-router.post("/addToCart", auth, (req, res) => {
+router.post("/addCart", auth, (req, res) => {
 
     /* 몽고DB users 컬렉션에 '현재 로그인한 유저 id'와 일치하는 id의 유저 정보를 가져와서 userInfo에 담음 */
     User.findOne({ _id: req.user._id },
@@ -128,7 +128,7 @@ router.post("/addToCart", auth, (req, res) => {
 })
 
 /* 장바구니 페이지 - 삭제하기 버튼 */
-router.get("/removeFromCart", auth, (req, res) => {
+router.get("/removeCart", auth, (req, res) => {
 
     User.findOneAndUpdate(
         { _id: req.user._id },

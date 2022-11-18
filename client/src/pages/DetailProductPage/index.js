@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import ProductImage from './Sections/ProductImage';
-import ProductInfo from './Sections/ProductInfo';
 import { Row, Col } from 'antd';
+import { BASE_URL, PRODUCT_URL } from "../../constants/api";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import ProductImage from '../../components/DetailProduct/ProductImage';
+import ProductInfo from '../../components/DetailProduct/ProductInfo';
+import Auth from "../../hooks/auth";
 
-function DetailProduct(props) {
+const Index = (props) => {
 
-    const productId = props.match.params.productId /* 유니크 아이디 */
+    const { productId } = useParams() /* 유니크 아이디 */
     const [product, setProduct] = useState({})
 
     useEffect(() => {
-        axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
+        axios.get(`${BASE_URL}${PRODUCT_URL.PRODUCTS_BY_ID}?id=${productId}&type=single`)
             .then((response) => {
                 setProduct(response.data[0])
             })
@@ -37,4 +40,4 @@ function DetailProduct(props) {
     )
 }
 
-export default DetailProduct
+export default Auth(Index, null)

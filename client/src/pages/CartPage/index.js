@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCartItems, onSuccessBuy, removeCartItem } from '../../store/actions/user';
 import { Empty, Result } from 'antd';
-import UserCardBlock from './Sections/UserCardBlock';
+import UserCardBlock from '../../components/Cart/UserCardBlock';
 import Paypal from '../../utils/Paypal';
+import Auth from "../../hooks/auth";
 
-function Cart(props) {
+const Index = (props) => {
 
     const dispatch = useDispatch()
     const [total, setTotal] = useState(0) /* 총 결제금액 state */
@@ -26,7 +27,7 @@ function Cart(props) {
     }, [props.user.userData])
 
     /* 삭제하기 버튼 */
-    let removeFromCart = (productId) => {
+    let removeCart = (productId) => {
         dispatch(removeCartItem(productId))
             .then((response) => {
                 if (response.payload.productInfo.length <= 0) {
@@ -71,7 +72,7 @@ function Cart(props) {
         <div style={{ width: '85%', margin: '3rem auto' }}>
             <h1>My Cart</h1>
             <div>
-                <UserCardBlock products={props.user.cartDetail} removeItem={removeFromCart} />
+                <UserCardBlock products={props.user.cartDetail} removeItem={removeCart} />
             </div>
             {
                 showTotal ?
@@ -96,4 +97,4 @@ function Cart(props) {
     )
 }
 
-export default Cart
+export default Auth(Index, true)

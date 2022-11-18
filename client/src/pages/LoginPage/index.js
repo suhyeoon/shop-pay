@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/actions/user";
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { useDispatch } from "react-redux";
+import { USER_PATH } from "../../constants/path";
+import * as Yup from 'yup';
+import Auth from "../../hooks/auth";
 
 const { Title } = Typography;
 
-function Login(props) {
-  const dispatch = useDispatch();
+const Index = (props) => {
+  let navigate = useNavigate()
+  const dispatch = useDispatch()
   const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
 
   const [formErrorMessage, setFormErrorMessage] = useState('')
@@ -51,7 +54,7 @@ function Login(props) {
                 } else {
                   localStorage.removeItem('rememberMe');
                 }
-                props.history.push("/");
+                navigate("/");
               } else {
                 setFormErrorMessage('Check out your Account or Password again')
               }
@@ -134,7 +137,7 @@ function Login(props) {
                     Log in
                   </Button>
                 </div>
-                Or <a href="/register">register now!</a>
+                Or <a href={USER_PATH.REGISTER}>register now!</a>
               </Form.Item>
             </form>
           </div>
@@ -144,4 +147,4 @@ function Login(props) {
   );
 };
 
-export default withRouter(Login);
+export default Auth(Index, false)

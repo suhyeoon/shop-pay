@@ -2,32 +2,34 @@
 import React from 'react';
 import { Menu, Badge, Icon } from 'antd';
 import axios from 'axios';
-import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL, USER_URL } from '../../constants/api';
+import { USER_PATH, PRODUCT_PATH } from '../../constants/path';
 
 function RightMenu(props) {
+  let navigate = useNavigate()
   const user = useSelector(state => state.user)
 
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then(response => {
+    axios.get(`${BASE_URL}${USER_URL.LOGOUT}`).then(response => {
       if (response.status === 200) {
-        props.history.push("/login");
+        navigate(`${USER_PATH.LOGIN}`)
       } else {
         alert('Log Out Failed')
       }
-    });
-  };
+    })
+  }
 
   /* 로그인 안 했을 때 */
   if (user.userData && !user.userData.isAuth) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login">Signin</a>
+          <a href={USER_PATH.LOGIN}>Signin</a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">Signup</a>
+          <a href={USER_PATH.REGISTER}>Signup</a>
         </Menu.Item>
       </Menu>
     )
@@ -35,14 +37,14 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="history">
-          <a href='/history'>History</a>
+          <a href={USER_PATH.HISTORY}>History</a>
         </Menu.Item>
         <Menu.Item key="upload">
-          <a href='/product/upload'>Upload</a>
+          <a href={PRODUCT_PATH.UPLOAD}>Upload</a>
         </Menu.Item>
         <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
           <Badge count={user.userData && user.userData.cart.length}>
-            <a href="/user/cart" style={{ marginRight: -22, color: '#667777' }}>
+            <a href={USER_PATH.CART} style={{ marginRight: -22, color: '#667777' }}>
               <Icon type="shopping-cart" style={{ fontSize: 20, marginBottom: 3 }} />
             </a>
           </Badge>
@@ -55,4 +57,4 @@ function RightMenu(props) {
   }
 }
 
-export default withRouter(RightMenu)
+export default RightMenu

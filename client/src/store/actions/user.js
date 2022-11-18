@@ -4,15 +4,15 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
-    ADD_TO_CART,
+    ADD_CART,
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
     ON_SUCCESS_BUY
 } from './types';
-import { USER_SERVER } from '../../Config';
+import { BASE_URL, USER_URL, PRODUCT_URL } from '../../constants/api';
 
 export function registerUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
+    const request = axios.post(`${BASE_URL}${USER_URL.REGISTER}`, dataToSubmit)
         .then(response => response.data);
 
     return {
@@ -22,7 +22,7 @@ export function registerUser(dataToSubmit) {
 }
 
 export function loginUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
+    const request = axios.post(`${BASE_URL}${USER_URL.LOGIN}`, dataToSubmit)
         .then(response => response.data);
 
     return {
@@ -32,7 +32,7 @@ export function loginUser(dataToSubmit) {
 }
 
 export function auth() {
-    const request = axios.get(`${USER_SERVER}/auth`)
+    const request = axios.get(`${BASE_URL}${USER_URL.AUTH}`)
         .then(response => response.data);
 
     return {
@@ -42,7 +42,7 @@ export function auth() {
 }
 
 export function logoutUser() {
-    const request = axios.get(`${USER_SERVER}/logout`)
+    const request = axios.get(`${BASE_URL}${USER_URL.LOGOUT}`)
         .then(response => response.data);
 
     return {
@@ -52,24 +52,24 @@ export function logoutUser() {
 }
 
 /* 상품 상세보기 페이지 - 장바구니 담기 버튼 */
-export function addToCart(id) {
+export function addCart(id) {
 
     let body = {
         productId: id
     }
 
-    const request = axios.post(`${USER_SERVER}/addToCart`, body)
+    const request = axios.post(`${BASE_URL}${USER_URL.ADD_CART}`, body)
         .then((response) => { return response.data })
 
     return {
-        type: ADD_TO_CART,
+        type: ADD_CART,
         payload: request
     }
 }
 
 /* 장바구니 페이지 - cart 안에 있는 각 상품의 id */
 export function getCartItems(cartItems, userCart) {
-    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+    const request = axios.get(`${BASE_URL}${PRODUCT_URL.PRODUCTS_BY_ID}?id=${cartItems}&type=array`)
         .then((response) => {
             userCart.forEach((cartItem) => {
                 response.data.forEach((productDetail, index) => {
@@ -90,7 +90,7 @@ export function getCartItems(cartItems, userCart) {
 /* 장바구니 페이지 - 삭제하기 버튼 */
 export function removeCartItem(productId) {
 
-    const request = axios.get(`/api/users/removeFromCart?id=${productId}`)
+    const request = axios.get(`${BASE_URL}${USER_URL.REMOVE_CART}?id=${productId}`)
         .then((response) => {
             response.data.cart.forEach((item) => {
                 response.data.productInfo.forEach((product, index) => {
@@ -111,7 +111,7 @@ export function removeCartItem(productId) {
 /* 장바구니 페이지 - paypal 결제 성공 */
 export function onSuccessBuy(data) {
 
-    const request = axios.post(`/api/users/successBuy`, data)
+    const request = axios.post(`${BASE_URL}${USER_URL.SUCCESS_BUY}`, data)
         .then((response) => {
             return response.data
         })

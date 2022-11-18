@@ -1,6 +1,7 @@
 import React from 'react'
+import Auth from "../../hooks/auth";
 
-function History(props) {
+const Index = (props) => {
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <div style={{ textAlign: 'center' }}>
@@ -40,4 +41,4 @@ function History(props) {
     )
 }
 
-export default History
+export default Auth(Index, true)

@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
 })
 
 /* 랜딩 페이지 - 몽고DB products 컬렉션에 있는 모든 상품 정보를 가져옴*/
-router.post("/products", (req, res) => {
+router.post("/getProducts", (req, res) => {
 
     let skip = req.body.skip ? parseInt(req.body.skip) : 0
     let limit = req.body.limit ? parseInt(req.body.limit) : 20
@@ -103,7 +103,7 @@ router.post("/products", (req, res) => {
 })
 
 /* 상품상세보기 페이지, 장바구니 페이지 */
-router.get('/products_by_id', (req, res) => {
+router.get('/productsById', (req, res) => {
 
     /* 쿼리는 req.query로 가져옴 */
     let type = req.query.type

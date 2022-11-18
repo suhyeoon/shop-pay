@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import LeftMenu from './Sections/LeftMenu';
-import RightMenu from './Sections/RightMenu';
 import { Drawer, Button, Icon } from 'antd';
-import './Sections/Nav.css';
+import LeftMenu from '../../components/Nav/LeftMenu';
+import RightMenu from '../../components/Nav/RightMenu';
+import './Nav.css';
 
-function Nav() {
+const Index = () => {
   const [visible, setVisible] = useState(false)
 
   const showDrawer = () => {
@@ -50,4 +50,4 @@ function Nav() {
   )
 }
 
-export default Nav
+export default Index

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import { Icon, Col, Card, Row } from 'antd';
+import { countries, price } from '../../components/Landing/Datas';
+import { BASE_URL, PRODUCT_URL } from "../../constants/api";
+import axios from 'axios';
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider';
-import CheckBox from './Sections/CheckBox';
-import RadioBox from './Sections/RadioBox';
-import SearchFeature from './Sections/SearchFeature';
-import { countries, price } from './Sections/Datas';
+import CheckBox from '../../components/Landing/CheckBox';
+import RadioBox from '../../components/Landing/RadioBox';
+import SearchFeature from '../../components/Landing/SearchFeature';
+import Auth from "../../hooks/auth";
 
-function Landing() {
+const Index = () => {
 
     const [products, setProducts] = useState([])
     const [skip, setSkip] = useState(0)
@@ -30,7 +32,7 @@ function Landing() {
 
     /* 상품 가져오는 기능 */
     const getProduct = (body) => {
-        axios.post('/api/product/products', body)
+        axios.post(`${BASE_URL}${PRODUCT_URL.GET_PRODUCTS}`, body)
             .then((response) => {
                 if (response.data.success) {
                     if (body.loadMore) { /* 더보기 버튼을 누른 경우 */
@@ -179,4 +181,4 @@ function Landing() {
     )
 }
 
-export default Landing
+export default Auth(Index, null)

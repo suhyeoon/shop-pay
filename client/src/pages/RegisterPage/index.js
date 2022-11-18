@@ -1,9 +1,10 @@
 import React from "react";
-import moment from "moment";
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { registerUser } from "../../store/actions/user";
 import { useDispatch } from "react-redux";
+import moment from "moment";
+import * as Yup from 'yup';
+import Auth from "../../hooks/auth";
 
 import {
   Form,
@@ -34,7 +35,7 @@ const tailFormItemLayout = {
   },
 };
 
-function Register(props) {
+const Index = (props) => {
   const dispatch = useDispatch();
   return (
 
@@ -200,4 +201,4 @@ function Register(props) {
 };
 
 
-export default Register
+export default Auth(Index, false)
