@@ -1,0 +1,39 @@
+.gnb { box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07); }
+
+.gnb_aside { height: 36px; }
+.gnb_aside ul { float: right; }
+.gnb_aside ul li { float: left; position: relative; line-height: 36px; }
+.gnb_aside ul li a { display: inline-block; padding-left: 12px; height: 36px; font-size: 12px; }
+.gnb_aside ul li:first-child a { color: #5f0080; padding-right:12px }
+.gnb_aside ul li:first-child:after { content: ""; position: absolute; right: 0; top: 12px; width: 1px; height: 13px; background-color: #d9d9d9; }
+
+.gnb_top { overflow: hidden; height: 63px; line-height: 63px; }
+.gnb_top .logo { float: left; }
+.gnb_top .logo h1 { display: inline-block; }
+.gnb_top .logo a { display: inline-block; }
+.gnb_top .logo img { width: 82px; height: 42px; }
+.gnb_top .logo strong { margin-left: 20px; font-size: 18px; color: #5f0080; font-weight: 500; vertical-align: middle; }
+
+.gnb_top .search { position: relative; height: 63px; }
+.gnb_top .search_wrap { float: left; position: absolute; top: 50%; left: 50%; padding-left: 14px; width: 400px; height: 48px; border: 1px solid #5f0080; border-radius: 6px; line-height: 45px; transform: translate(-50%, -50%); }
+.gnb_top .search input { width: 300px; font-size: 16px; color: #333333; }
+.gnb_top .search button { float: right; margin: 10px; width: 30px; height: 26px; background-color: #fff; line-height: 20px; }
+.gnb_top .search button .icon { display: inline-block; font-size: 16px; color: #5f0080; vertical-align: middle; }
+
+.gnb_top .util { position: absolute; top: 0; right: 0; }
+.gnb_top .util ul li { float: left; }
+.gnb_top .util ul li:first-child { margin-right: 8px; }
+.gnb_top .util ul li a { display: inline-block; line-height: 63px; font-size: 12px; }
+.gnb_top .util ul li a .user { margin-left: 3px; }
+.gnb_top .util ul li a .cart { margin-left: 3px; }
+
+.gnb_btm { display: fixed; height: 56px; font-size: 16px; }
+.gnb_btm .category { float: left; line-height: 56px; }
+.gnb_btm .category .icon { margin-right: 14px; }
+.gnb_btm .category p { display: inline-block; }
+.gnb_btm .category p:hover { color: #5f0080; }
+.gnb_btm .menu { float: left; }
+.gnb_btm .menu ul { float: left; padding-top: 18px; }
+.gnb_btm .menu ul li { float: left; margin: 0 20px; }
+.gnb_btm .menu ul li a { display: inline-block; cursor: pointer; }
+.gnb_btm .menu ul li a:hover { color: #5f0080; text-decoration: #5f0080 underline 1px; text-underline-offset: 4px; }

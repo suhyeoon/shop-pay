@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/actions/user";
 import { Formik } from 'formik';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
+// import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { useDispatch } from "react-redux";
 import { USER_PATH } from "../../constants/path";
 import * as Yup from 'yup';

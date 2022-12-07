@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone'
-import { Icon } from 'antd';
+// import { Icon } from 'antd';
 import './FileUpload.css';
 import axios from 'axios';
 import { BASE_URL, PRODUCT_URL } from '../constants/api'

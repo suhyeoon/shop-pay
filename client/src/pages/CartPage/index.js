@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCartItems, onSuccessBuy, removeCartItem } from '../../store/actions/user';
-import { Empty, Result } from 'antd';
+// import { Empty, Result } from 'antd';
 import UserCardBlock from '../../components/Cart/UserCardBlock';
 import Paypal from '../../utils/Paypal';
 import Auth from "../../hooks/auth";

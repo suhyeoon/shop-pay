@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Form, Input } from 'antd';
+// import { Typography, Form, Input } from 'antd';
 import { BASE_URL } from "../../constants/api";
 import FileUpload from '../../utils/FileUpload';
 import axios from 'axios';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col } from 'antd';
+// import { Row, Col } from 'antd';
 import { BASE_URL, PRODUCT_URL } from "../../constants/api";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
