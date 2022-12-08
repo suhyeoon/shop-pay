@@ -1,0 +1,27 @@
+.footer { border-top: 1px solid #ddd; font-size: 12px; }
+.footer li { float: left; margin-right: 20px; color: #757575; }
+
+.footer .policy { line-height: 70px; }
+.footer .address { margin-bottom: 10px; }
+.footer .address ul { overflow: hidden; line-height: 23px; }
+.footer .address p { line-height: 23px; color: #757575; }
+
+.footer .sns { margin-bottom: 15px; }
+.footer .sns li { margin-right: 10px; }
+.footer .sns li a { display: inline-block; width: 30px; height: 30px; }
+
+.footer .safe { display: flex; justify-content: center; align-items: center; padding: 18px 0; border-top: 1px solid #eee; }
+.footer .safe li { display: flex; margin-right: 11px; font-size: 10px; }
+.footer .safe img { margin-right: 5px; width: 34px; height: 34px; vertical-align: top; }
+.footer .safe p { display: inline-block; color: #757575; }
+
+.footer .copyright { padding: 20px 0 12px; background: #f7f7f7; color: #999; text-align: center; }
+.footer em { display: inline-block; padding-top: 10px }
+
+
+
+
+
+
+
+

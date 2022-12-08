@@ -13,7 +13,7 @@ const LandingPage = lazy(() => import("./pages/LandingPage"))
 const Navbar = lazy(() => import("./components/Navbar"))
 // const LoginPage = lazy(() => import("./pages/LoginPage"))
 // const RegisterPage = lazy(() => import("./pages/RegisterPage"))
-// const FooterPage = lazy(() => import("./pages/FooterPage"))
+const FooterPage = lazy(() => import("./pages/FooterPage"))
 // const UploadProductPage = lazy(() => import("./pages/UploadProductPage"))
 // const DetailProductPage = lazy(() => import("./pages/DetailProductPage"))
 // const CartPage = lazy(() => import("./pages/CartPage"))
@@ -37,7 +37,7 @@ function App() {
       */}
 
       </Routes>
-      {/* <FooterPage /> */}
+      <FooterPage />
     </Suspense>
   )
 }
