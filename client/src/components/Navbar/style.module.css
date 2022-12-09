@@ -35,5 +35,5 @@
 .gnb_btm .menu { float: left; }
 .gnb_btm .menu ul { float: left; padding-top: 18px; }
 .gnb_btm .menu ul li { float: left; margin: 0 20px; }
-.gnb_btm .menu ul li a { display: inline-block; cursor: pointer; }
+.gnb_btm .menu ul li a { display: inline-block; }
 .gnb_btm .menu ul li a:hover { color: #5f0080; text-decoration: #5f0080 underline 1px; text-underline-offset: 4px; }
