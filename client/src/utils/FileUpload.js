@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone'
-import { Alert, Icon } from 'antd';
+// import { Icon } from 'antd';
 import './FileUpload.css';
 import axios from 'axios';
+import { BASE_URL, PRODUCT_URL } from '../constants/api'
 
 function FileUpload(props) {
 
@@ -17,7 +18,7 @@ function FileUpload(props) {
         formData.append("file", files[0])
 
         /* 서버에 이미지파일 전송 (이미지를 올렸을 때)  */
-        axios.post('/api/product/image', formData, config)
+        axios.post(`${BASE_URL}${PRODUCT_URL.IMAGE}`, formData, config)
             .then((response) => {
                 if (response.data.success) {
                     console.log(response.data)

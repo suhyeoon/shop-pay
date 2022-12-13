@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.24.1",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "formik": "^1.5.8",
@@ -16,11 +19,13 @@
     "react-image-gallery": "^1.2.11",
     "react-paypal-express-checkout": "^1.0.5",
     "react-redux": "^7.1.0-rc.1",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "3.4.1",
     "redux": "^4.0.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.3.6",
+    "swiper": "^8.1.5",
     "yup": "^0.27.0"
   },
   "scripts": {

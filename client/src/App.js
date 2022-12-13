@@ -1,33 +1,43 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Switch } from "react-router-dom";
-import Auth from "./hooks/auth";
+import { Routes, Route } from "react-router-dom";
+import { BASE_PATH, USER_PATH, PRODUCT_PATH } from "./constants/path";
 
-const Landing = lazy(() => import("./Landing/Landing"))
-const Login = lazy(() => import("./Login/Login"))
-const Register = lazy(() => import("./Register/Register"))
-const Nav = lazy(() => import("./Nav/Nav"))
-const Footer = lazy(() => import("./Footer/Footer"))
-const UploadProduct = lazy(() => import("./UploadProduct/UploadProduct"))
-const DetailProduct = lazy(() => import("./DetailProduct/DetailProduct"))
-const Cart = lazy(() => import("./Cart/Cart"))
-const History = lazy(() => import("./History/History"))
+import 'swiper/swiper.scss';
+import 'swiper/modules/navigation/navigation.scss';
+import 'swiper/modules/pagination/pagination.scss';
+
+import './reset.css'
+import './App.css'
+
+const LandingPage = lazy(() => import("./pages/LandingPage"))
+const Navbar = lazy(() => import("./components/Navbar"))
+// const LoginPage = lazy(() => import("./pages/LoginPage"))
+// const RegisterPage = lazy(() => import("./pages/RegisterPage"))
+const FooterPage = lazy(() => import("./pages/FooterPage"))
+// const UploadProductPage = lazy(() => import("./pages/UploadProductPage"))
+// const DetailProductPage = lazy(() => import("./pages/DetailProductPage"))
+// const CartPage = lazy(() => import("./pages/CartPage"))
+// const HistoryPage = lazy(() => import("./pages/HistoryPage"))
 
 function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
-      <Nav />
-      <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
-        <Switch>
-          <Route exact path="/" component={Auth(Landing, null)} />
-          <Route exact path="/login" component={Auth(Login, false)} />
-          <Route exact path="/register" component={Auth(Register, false)} />
-          <Route exact path="/product/upload" component={Auth(UploadProduct, true)} /> {/* 로그인한 유저만 접속 가능 */}
-          <Route exact path="/product/:productId" component={Auth(DetailProduct, null)} /> {/* 로그인하지 않아도 접속 가능 */}
-          <Route exact path="/user/cart" component={Auth(Cart, true)} /> {/* 로그인한 유저만 접속 가능 */}
-          <Route exact path="/history" component={Auth(History, true)} /> {/* 로그인한 유저만 접속 가능 */}
-        </Switch>
-      </div>
-      <Footer />
+      <Navbar />
+      <Routes>
+
+        <Route exact path={BASE_PATH} element={<LandingPage />} />
+
+        {/*
+        <Route exact path={USER_PATH.LOGIN} element={<LoginPage />} />
+        <Route exact path={USER_PATH.REGISTER} element={<RegisterPage />} />
+        <Route exact path={PRODUCT_PATH.UPLOAD} element={<UploadProductPage />} />
+        <Route exact path={PRODUCT_PATH.PRODUCTID} element={<DetailProductPage />} />
+        <Route exact path={USER_PATH.CART} element={<CartPage />} />
+        <Route exact path={USER_PATH.HISTORY} element={<HistoryPage />} />
+      */}
+
+      </Routes>
+      <FooterPage />
     </Suspense>
   )
 }

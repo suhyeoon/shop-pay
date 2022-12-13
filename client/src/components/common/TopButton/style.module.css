@@ -1,0 +1,3 @@
+.topBtn { position: fixed; bottom: -45px; right: 30px; width: 58px; height: 58px; transition: opacity 0.5s ease 0s, bottom 0.7s ease 0s; background-color: transparent; opacity: 0; z-index: 9999; }
+.topBtn_active { position: fixed; bottom: 15px; right: 30px; width: 58px; height: 58px; transition: opacity 0.5s ease 0s, bottom 0.7s ease 0s; background-color: transparent; opacity: 1; z-index: 9999; }
+.topBtn img { width: 58px; height: 58px; }
