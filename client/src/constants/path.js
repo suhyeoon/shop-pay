@@ -9,5 +9,7 @@ export const USER_PATH = {
 
 export const PRODUCT_PATH = {
     UPLOAD: '/upload',
+    PRODUCTLIST: '/list',
     PRODUCTID: '/product/:productId'
+
 }
