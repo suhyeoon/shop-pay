@@ -16,7 +16,7 @@ const Navbar = lazy(() => import("./components/Navbar"))
 const ListProductPage = lazy(() => import("./pages/ListProductPage"))
 const FooterPage = lazy(() => import("./pages/FooterPage"))
 // const UploadProductPage = lazy(() => import("./pages/UploadProductPage"))
-// const DetailProductPage = lazy(() => import("./pages/DetailProductPage"))
+const DetailProductPage = lazy(() => import("./pages/DetailProductPage"))
 // const CartPage = lazy(() => import("./pages/CartPage"))
 // const HistoryPage = lazy(() => import("./pages/HistoryPage"))
 
@@ -32,13 +32,12 @@ function App() {
         <Route exact path={USER_PATH.LOGIN} element={<LoginPage />} />
         <Route exact path={USER_PATH.REGISTER} element={<RegisterPage />} />
         <Route exact path={PRODUCT_PATH.UPLOAD} element={<UploadProductPage />} />
-        <Route exact path={PRODUCT_PATH.PRODUCTID} element={<DetailProductPage />} />
         <Route exact path={USER_PATH.CART} element={<CartPage />} />
         <Route exact path={USER_PATH.HISTORY} element={<HistoryPage />} />
       */}
 
         <Route exact path={PRODUCT_PATH.PRODUCTLIST} element={<ListProductPage />} />
-
+        <Route exact path={PRODUCT_PATH.DETAIL} element={<DetailProductPage />} />
 
       </Routes>
       <FooterPage />

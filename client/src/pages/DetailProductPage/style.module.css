@@ -1,0 +1,36 @@
+.wrap { padding: 30px 0 40px; }
+
+.thumbnail { float: left; width: 430px; height: 700px; margin-right: 60px; }
+.thumbnail .main { width: 430px; height: 552px; margin-bottom: 10px; }
+.thumbnail .sub { float: left; padding: 0 20px; }
+.thumbnail .sub li { float: left; margin-right: 15px; }
+.thumbnail .sub li:last-child { margin-right:0 }
+.thumbnail .sub li img { width: 120px; height: 120px; }
+
+.info { letter-spacing: -0.5px; }
+.info .desc em { display: inline-block; margin-bottom: 6px; line-height: 19px; color: #999; }
+.info .desc h2 { margin-bottom: 11px; font-size: 24px; line-height: 34px; }
+.info .desc p { margin-bottom: 19px; line-height: 19px; color: #b5b5b5; }
+.info .desc strong { display: inline-block; margin-bottom: 14px; font-size: 28px; }
+.info .desc strong span { padding-left: 4px; font-size: 18px; }
+.info .desc_wrap { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; width: 560px; }
+.info .desc dl { display: flex; flex-direction: row; flex: 1 1 auto; width: 100%; padding: 18px 0; border-top: 1px solid #f4f4f4; }
+.info .desc dl:last-child { border-bottom: 1px solid #f4f4f4; }
+.info .desc dl dt { flex: 0 0 23%; }
+.info .desc dl dd { flex: 0 0 65%; }
+.info .desc .count { width: 457px; height: 82px; padding: 11px 11px 11px 15px; border: 1px solid #f4f4f4; }
+.info .desc .count strong { display: block; margin-bottom: 12px; font-size: 12px; }
+.info .desc .count .quantity { float: left; height: 28px; border: 1px solid #dddfe1; }
+.info .desc .count .quantity .btn { width: 27px; height: 100%; background-color: #fff; }
+.info .desc .count .quantity .btn.minus { float: left; }
+.info .desc .count .quantity .btn.plus { float: right; }
+.info .desc .count .quantity .btn .icon { display: inline-block; background-color: #fff; font-size: 12px; }
+.info .desc .count .quantity p { float: left; width: 28px; height: 100%; line-height: 28px; color: #333; vertical-align:middle; text-align: center; }
+.info .desc .count .price { float: right; font-size: 12px; color: #333; font-weight: 700; line-height: 28px; text-align: center; }
+
+.info .total p { font-size: 13px; font-weight: 500; }
+.info .total p strong { display: inline-block; font-size: 32px; font-weight: 700; line-height: 97px; }
+.info .total p span { display: inline-block; font-size: 20px; font-weight: 600; }
+.info .total_wrap { float: right; height: 97px; line-height: 97px; }
+
+.info .cart { float: right; width: 432px; height: 56px; border-radius: 3px; background-color: #5f0080; color: #fff; font-weight: 500; line-height: 56px; text-align: center; } 

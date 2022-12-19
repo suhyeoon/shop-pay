@@ -73,7 +73,7 @@ const Index = () => {
           <ul>
             <li><a href="#!">신상품</a></li>
             <li><a href={PRODUCT_PATH.PRODUCTLIST}>베스트</a></li>
-            <li><a href="#!">알뜰쇼핑</a></li>
+            <li><a href={PRODUCT_PATH.DETAIL}>알뜰쇼핑</a></li>
             <li><a href="#!">혜택</a></li>
           </ul>
         </div>
