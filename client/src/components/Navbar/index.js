@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 // import LeftMenu from './LeftMenu';
 // import RightMenu from './RightMenu';
 import styles from './style.module.css';
+import { PRODUCT_PATH } from "../../constants/path";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping, faMagnifyingGlass, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -71,7 +72,7 @@ const Index = () => {
         <div className={styles.menu}>
           <ul>
             <li><a href="#!">신상품</a></li>
-            <li><a href="#!">베스트</a></li>
+            <li><a href={PRODUCT_PATH.PRODUCTLIST}>베스트</a></li>
             <li><a href="#!">알뜰쇼핑</a></li>
             <li><a href="#!">혜택</a></li>
           </ul>

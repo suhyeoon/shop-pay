@@ -14,7 +14,8 @@ const Index = () => {
     }
     useEffect(() => {
         const ShowButtonClick = () => {
-            if (window.scrollY > 550) {
+            console.log(window.scrollY);
+            if (window.scrollY > 520) {
                 setShowButton(true)
             } else {
                 setShowButton(false)
