@@ -1,0 +1,7 @@
+.form { padding: 60px 0; }
+.form .title { margin-bottom: 30px; font-size: 20px; font-weight: 800; line-height: 20px; text-align: center; }
+.form input { display: block; width: 340px; height: 54px; margin: 0 auto; padding-left: 15px; line-height: 54px; border: 1px solid #ddd; border-radius: 4px; }
+.form input[type="text"] { margin-bottom: 10px; } 
+.form button { display: block; width: 340px; height: 54px; margin: 0 auto; border-radius: 3px; }
+.form .login { margin-top: 33px; background-color: #5f0080; color: #fff; }
+.form .signup { margin-top: 10px; background-color: #fff; border: 1px solid #5f0080; }
