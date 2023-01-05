@@ -10,13 +10,17 @@
 .join .term .required { display: inline-block; width: 140px; color: #333; font-weight: 500; text-align: left; vertical-align: top; }
 .join .term .required_point { color: #ff6a7b; }
 .join .term ul { display: inline-block; width: 458px; }
-.join .term li { height: 40px; line-height: 40px; border: 1px solid #000; }
-.join .term li:first-child { height: 65px; line-height: 65px; }
-.join .term li strong { display: block; height: 27px; font-size: 18px; font-weight: 500; line-height: 27px; }
-.join .term li em { display: block; height: 18px; font-size: 12px; line-height: 18px; }
+.join .term li { display: flex; justify-content: space-between; align-items: center; border: 1px solid #000; }
+.join .term li .wrap { display: flex; justify-content: center; align-items: center; height: 40px; padding: 8px 0; }
+.join .term li:first-child { height: 100px; justify-content: flex-start; align-items: flex-start; }
+.join .term li:first-child .wrap { flex-direction: column; }
+.join .term li:first-child .wrap strong { font-size: 18px; font-weight: 500; line-height: 27px; }
+.join .term li:first-child .wrap p { padding-left:36px; font-size: 12px; }
+
+
 .join .term .checkbox { }
 .join .term .point { padding-left: 5px; color: #999; }
-.join .term .policy { display: inline-block; float: right; color: #5f0080; }
+.join .term .policy { color: #5f0080; }
 .join .term .policy:after { content: ""; display: inline-block; margin-left: 5px; width: 6px; height: 11px; background: url("/images/ico_policy.svg"); }
 .join .btn { display: flex; justify-content: center; }
 .join .btn_wrap { width: 240px; height: 56px; margin-top: 50px; border-radius: 3px; background-color: #5f0080; color: #fff; }

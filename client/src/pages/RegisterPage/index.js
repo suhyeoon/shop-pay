@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './style.module.css';
+import Checkbox from '../../components/Register/Checkbox';
 
 const Index = () => {
     return (
@@ -27,14 +28,29 @@ const Index = () => {
                 </ul>
             </div>
             <div className={styles.term}>
-                <div className={styles.required}>이용약관동의<span className={styles.required_point}>*</span></div>
+                <div className={styles.required}>
+                    이용약관동의<span className={styles.required_point}>*</span></div>
                 <ul>
-                    <li><span className={styles.checkbox}></span><strong>전체 동의합니다.</strong>
-                        <em>선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</em>
+                    <li>
+                        <div className={styles.wrap}><Checkbox /><strong>전체 동의합니다.</strong>
+                            <p>선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</p>
+                        </div>
                     </li>
-                    <li><span className={styles.checkbox}></span>이용약관 동의<span className={styles.point}>(필수)</span><a className={styles.policy}>약관보기</a></li>
-                    <li><span className={styles.checkbox}></span>개인정보 수집∙이용 동의<span className={styles.point}>(필수)</span><a className={styles.policy}>약관보기</a></li>
-                    <li><span className={styles.checkbox}></span>본인은 만 14세 이상입니다.<span className={styles.point}>(필수)</span><a className={styles.policy}>약관보기</a></li>
+                    <li>
+                        <div className={styles.wrap}>
+                            <Checkbox /><p>이용약관 동의<span className={styles.point}>(필수)</span></p>
+                        </div>
+                        <a className={styles.policy}>약관보기</a></li>
+                    <li>
+                        <div className={styles.wrap}>
+                            <Checkbox /><p>개인정보 수집∙이용 동의<span className={styles.point}>(필수)</span></p>
+                        </div>
+                        <a className={styles.policy}>약관보기</a></li>
+                    <li>
+                        <div className={styles.wrap}>
+                            <Checkbox /><p>본인은 만 14세 이상입니다.<span className={styles.point}>(필수)</span></p>
+                        </div>
+                        <a className={styles.policy}>약관보기</a></li>
                 </ul>
             </div>
             <div className={styles.btn}>
