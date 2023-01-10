@@ -7,26 +7,26 @@ import Modal from './Modal'
 const Index = () => {
 
     const data = [
-        { id: 0, title: '선택 1' },
-        { id: 1, title: '선택 2' },
-        { id: 2, title: '선택 3' }
+        { id: "terms", title: '선택 1' },
+        { id: "privacy", title: '선택 2' },
+        { id: "age", title: '선택 3' },
     ]
 
     // 체크박스를 클릭했을 때 해당 체크박스가 가지고 있는 id
     const [checkedButtons, setCheckedButtons] = useState([])
 
     //  필수 체크박스가 전부 체크 시 버튼 활성화
-    const [colorButton, setColorButton] = useState(false)
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         if (
-            checkedButtons.includes(0) &&
-            checkedButtons.includes(1) &&
-            checkedButtons.includes(2)
+            checkedButtons.includes("terms") &&
+            checkedButtons.includes("privacy") &&
+            checkedButtons.includes("age")
         ) {
-            setColorButton(true)
+            setDisabled(false)
         } else {
-            setColorButton(false)
+            setDisabled(true)
         }
     }, [checkedButtons])
 
@@ -91,11 +91,11 @@ const Index = () => {
                             <label>
                                 <input
                                     type="checkbox"
-                                    name="0"
+                                    name="terms"
                                     onChange={e => {
-                                        singleCheckedHandler(e.target.checked, 0)
+                                        singleCheckedHandler(e.target.checked, "terms")
                                     }}
-                                    checked={checkedButtons.includes(0) ? true : false}
+                                    checked={checkedButtons.includes("terms") ? true : false}
                                 />
                                 <i></i>
                                 <p>이용약관 동의<span className={styles.point}>(필수)</span></p>
@@ -109,11 +109,11 @@ const Index = () => {
                             <label>
                                 <input
                                     type="checkbox"
-                                    name="1"
+                                    name="privacy"
                                     onChange={e => {
-                                        singleCheckedHandler(e.target.checked, 1)
+                                        singleCheckedHandler(e.target.checked, "privacy")
                                     }}
-                                    checked={checkedButtons.includes(1) ? true : false}
+                                    checked={checkedButtons.includes("privacy") ? true : false}
                                 />
                                 <i></i>
                                 <p>개인정보 수집∙이용 동의<span className={styles.point}>(필수)</span></p>
@@ -126,11 +126,11 @@ const Index = () => {
                             <label>
                                 <input
                                     type="checkbox"
-                                    name="2"
+                                    name="age"
                                     onChange={e => {
-                                        singleCheckedHandler(e.target.checked, 2)
+                                        singleCheckedHandler(e.target.checked, "age")
                                     }}
-                                    checked={checkedButtons.includes(2) ? true : false}
+                                    checked={checkedButtons.includes("age") ? true : false}
                                 />
                                 <i></i>
                                 <p>본인은 만 14세 이상입니다.<span className={styles.point}>(필수)</span></p>
@@ -145,12 +145,23 @@ const Index = () => {
                 {openModal && <Modal setOpenModal={setOpenModal} />}
 
                 <div className={styles.btn}>
-                    <button className={styles.btn_wrap}>
+                    <button
+                        className={styles.btn_wrap}
+                        onClick={() => {
+                            disabled
+                                ? alert("필수 항목을 동의 해주세요.")
+                                : alert("완료")
+                        }}
+                        style={
+                            disabled
+                                ? { backgroundColor: '#ccc' }
+                                : { backgroundColor: '#5f0080' }
+                        }
+                    >
                         가입하기
                     </button>
                 </div>
             </div>
-
         </>
     )
 }
