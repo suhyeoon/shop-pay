@@ -1,0 +1,2 @@
+.wrap { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 200px; z-index: 999; border: 1px solid black; border-radius: 8px; background-color: gray; }
+.close { position: absolute; top: 10px; right: 10px; }

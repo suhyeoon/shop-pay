@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // import LeftMenu from './LeftMenu';
 // import RightMenu from './RightMenu';
 import styles from './style.module.css';
-import { PRODUCT_PATH } from "../../constants/path";
+import { USER_PATH, PRODUCT_PATH } from "../../constants/path";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping, faMagnifyingGlass, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -23,8 +23,8 @@ const Index = () => {
     <header className={`${styles.gnb} clearfix`}>
       <section className={styles.gnb_aside}>
         <ul>
-          <li><a href="#!">회원가입</a></li>
-          <li><a href="#!">로그인</a></li>
+          <li><a href={USER_PATH.REGISTER}>회원가입</a></li>
+          <li><a href={USER_PATH.LOGIN}>로그인</a></li>
         </ul>
       </section>
       <section className={`${styles.gnb_top} clearfix`}>
