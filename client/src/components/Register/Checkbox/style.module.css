@@ -1,1 +1,21 @@
-.checkbox { width: 24px; height: 24px; margin-right: 12px; vertical-align: middle; } 
+ .term { padding: 22px 20px 0; border-top: 2px solid #333; }
+ .term .required { display: inline-block; width: 140px; color: #333; font-weight: 500; text-align: left; vertical-align: top; }
+ .term .required_point { color: #ff6a7b; }
+ .term ul { display: inline-block; width: 458px; }
+ .term li { display: flex; justify-content: space-between; align-items: center; border: 1px solid #000; }
+ .term li .wrap { display: flex; justify-content: center; align-items: center; height: 40px; padding: 8px 0; }
+ .term li:first-child .wrap { justify-content: flex-start; align-items: flex-start; flex-direction: column; height: 65px; }
+ .term li:first-child .wrap p { padding-left:36px; font-size: 12px; line-height: 22px; }
+ .term li:first-child .wrap .area { display: flex; justify-content: center; align-items: center; }
+ .term li:first-child .wrap .area strong { font-size: 18px; font-weight: 500; line-height: 27px; }
+
+.term label { display: inline-block; position: relative; }
+.term input[type="checkbox"] { position: absolute; top: 0; left: -100px; width: 0; height: 0; opacity: 0; }
+.term input[type="checkbox"]+i { display: inline-block; overflow: hidden; position: absolute; top: 0; left: 0; width: 24px; height: 24px; background: url("../../../assets/images/checkbox_off.svg"); }
+.term input[type="checkbox"]:checked+i { display: inline-block; overflow: hidden; width: 24px; height: 24px; background: url("../../../assets/images/checkbox_on.svg"); }
+
+ .term .point { padding-left: 5px; color: #999; }
+ .term .policy { color: #5f0080; }
+ .term .policy:after { content: ""; display: inline-block; margin-left: 5px; width: 6px; height: 11px; background: url("/images/ico_policy.svg"); }
+ .term .btn { display: flex; justify-content: center; }
+ .term .btn_wrap { width: 240px; height: 56px; margin-top: 50px; border-radius: 3px; background-color: #5f0080; color: #fff; }
